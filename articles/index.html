@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClawUtil - OpenClaw 工具与文章</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 20s infinite linear',
+                        'pulse-slow': 'pulse 3s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(100vh) translateX(0)', opacity: '0' },
+                            '10%, 90%': { opacity: '1' },
+                            '50%': { transform: 'translateY(50vh) translateX(50px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+        }
+        .article-card {
+            transition: all 0.3s ease;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200 min-h-screen relative overflow-x-hidden">
+
+    <!-- 背景网格 -->
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+    
+    <!-- 浮动粒子 -->
+    <div id="particles" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
+
+    <!-- 主内容 -->
+    <main class="relative z-20 max-w-5xl mx-auto px-6 py-12">
+        
+        <!-- 头部 -->
+        <header class="text-center mb-16">
+            <div class="flex justify-center items-center gap-4 mb-6">
+                <span class="text-6xl">🦞</span>
+                <div class="text-left">
+                    <h1 class="text-4xl md:text-5xl font-extrabold gradient-text">ClawUtil</h1>
+                    <p class="text-slate-400">OpenClaw 工具、文章与实战案例</p>
+                </div>
+            </div>
+            
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+                OpenClaw AI 助手的实战经验、故障排查指南、工具脚本与最佳实践
+            </p>
+            
+            <div class="flex justify-center gap-6 mt-8 text-sm">
+                <a href="https://github.com/zymclaw/clawutil" class="flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="https://openclaw.ai" class="flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                    OpenClaw
+                </a>
+                <a href="https://clawhub.ai" class="flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    ClawHub
+                </a>
+            </div>
+        </header>
+
+        <!-- 文章列表 -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="w-1 h-8 bg-gradient-to-b from-cyan-400 to-emerald-500 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-white">📝 技术文章</h2>
+            </div>
+            
+            <div class="grid gap-6">
+                <!-- 文章卡片 1 -->
+                <a href="articles/2026-03-07-openclaw-sandbox/2026-03-07-openclaw-sandbox-troubleshooting.html" class="article-card glass-card border border-slate-700/50 rounded-2xl overflow-hidden block">
+                    <div class="md:flex">
+                        <div class="md:w-64 md:flex-shrink-0">
+                            <img src="articles/2026-03-07-openclaw-sandbox/images/troubleshooting-flow.png" alt="故障排查流程" class="w-full h-48 md:h-full object-cover">
+                        </div>
+                        <div class="p-6 flex-1">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="bg-gradient-to-r from-cyan-500/20 to-emerald-500/20 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-semibold">
+                                    故障排查
+                                </span>
+                                <span class="bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-400 border border-purple-500/30 px-3 py-1 rounded-full text-xs font-semibold">
+                                    OpenClaw
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 hover:text-cyan-400 transition-colors">
+                                当我的 AI 助手突然"失忆"了 —— OpenClaw Sandbox 模式故障排查实录
+                            </h3>
+                            <p class="text-slate-400 mb-4 line-clamp-2">
+                                记录 OpenClaw 从 Docker 模式意外切换到 Host 模式的完整排查过程，包含 Host 模式与 Docker 模式的详细对比分析，以及故障处理经验总结。
+                            </p>
+                            <div class="flex items-center justify-between text-sm text-slate-500">
+                                <div class="flex items-center gap-4">
+                                    <span class="flex items-center gap-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        2026-03-07
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                        8 分钟阅读
+                                    </span>
+                                </div>
+                                <span class="text-cyan-400 hover:underline">阅读全文 →</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 占位卡片 - 即将发布 -->
+                <div class="article-card glass-card border border-slate-700/50 rounded-2xl p-6 opacity-50">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="bg-slate-700 text-slate-400 px-3 py-1 rounded-full text-xs font-semibold">
+                            即将发布
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-400 mb-2">
+                        更多精彩文章正在路上...
+                    </h3>
+                    <p class="text-slate-500">
+                        敬请期待更多 OpenClaw 实战教程、工具脚本和最佳实践分享
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 分类标签 -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="w-1 h-8 bg-gradient-to-b from-cyan-400 to-emerald-500 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-white">🏷️ 分类标签</h2>
+            </div>
+            
+            <div class="flex flex-wrap gap-3">
+                <span class="glass-card border border-cyan-500/30 text-cyan-400 px-4 py-2 rounded-full text-sm hover:bg-cyan-500/10 cursor-pointer transition-all">
+                    # OpenClaw
+                </span>
+                <span class="glass-card border border-emerald-500/30 text-emerald-400 px-4 py-2 rounded-full text-sm hover:bg-emerald-500/10 cursor-pointer transition-all">
+                    # 故障排查
+                </span>
+                <span class="glass-card border border-purple-500/30 text-purple-400 px-4 py-2 rounded-full text-sm hover:bg-purple-500/10 cursor-pointer transition-all">
+                    # Docker
+                </span>
+                <span class="glass-card border border-pink-500/30 text-pink-400 px-4 py-2 rounded-full text-sm hover:bg-pink-500/10 cursor-pointer transition-all">
+                    # AI 助手
+                </span>
+                <span class="glass-card border border-orange-500/30 text-orange-400 px-4 py-2 rounded-full text-sm hover:bg-orange-500/10 cursor-pointer transition-all">
+                    # 最佳实践
+                </span>
+                <span class="glass-card border border-blue-500/30 text-blue-400 px-4 py-2 rounded-full text-sm hover:bg-blue-500/10 cursor-pointer transition-all">
+                    # 技术教程
+                </span>
+            </div>
+        </section>
+
+        <!-- 快速链接 -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="w-1 h-8 bg-gradient-to-b from-cyan-400 to-emerald-500 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-white">🔗 快速链接</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <a href="https://openclaw.ai" class="glass-card border border-slate-700/50 rounded-xl p-5 hover:border-cyan-500/50 transition-all group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-2xl">🦞</span>
+                        <h3 class="font-bold text-white group-hover:text-cyan-400 transition-colors">OpenClaw 官网</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm">打造你的 AI 私人助理</p>
+                </a>
+                
+                <a href="https://clawhub.ai" class="glass-card border border-slate-700/50 rounded-xl p-5 hover:border-emerald-500/50 transition-all group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-2xl">🏪</span>
+                        <h3 class="font-bold text-white group-hover:text-emerald-400 transition-colors">ClawHub 技能市场</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm">发现和分享 AI 技能</p>
+                </a>
+                
+                <a href="https://docs.openclaw.ai" class="glass-card border border-slate-700/50 rounded-xl p-5 hover:border-purple-500/50 transition-all group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-2xl">📚</span>
+                        <h3 class="font-bold text-white group-hover:text-purple-400 transition-colors">OpenClaw 文档</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm">完整的使用指南和 API 文档</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="text-center text-slate-500 pt-8 border-t border-slate-800">
+            <p>© 2026 ClawUtil. 保留所有权利。</p>
+            <p class="mt-2 text-sm">The lobster grows stronger. 🦞</p>
+            <div class="flex justify-center gap-6 mt-6">
+                <a href="https://github.com/zymclaw/clawutil" class="hover:text-cyan-400 transition-colors">GitHub</a>
+                <a href="https://openclaw.ai" class="hover:text-cyan-400 transition-colors">OpenClaw</a>
+                <a href="https://clawhub.ai" class="hover:text-cyan-400 transition-colors">ClawHub</a>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // 生成背景粒子
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'absolute w-1 h-1 bg-cyan-400/40 rounded-full animate-float';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
