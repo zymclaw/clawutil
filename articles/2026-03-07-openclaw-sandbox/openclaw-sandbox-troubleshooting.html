@@ -395,22 +395,6 @@
             }
         }
 
-        /* 动画效果 */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        article {
-            animation: fadeIn 0.5s ease-out;
-        }
-
         /* 时间线 */
         .timeline {
             position: relative;
@@ -450,6 +434,11 @@
     </style>
 </head>
 <body>
+    <nav class="nav-bar">
+        <a href="../index.html" class="logo">🦞 ClawUtil</a>
+        <a href="../index.html" class="back-link">← 返回列表</a>
+    </nav>
+
     <header>
         <h1>当我的 AI 助手突然"失忆"了</h1>
         <p class="subtitle">OpenClaw Sandbox 模式故障排查实录</p>
