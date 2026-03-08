@@ -287,6 +287,62 @@ ARTICLE_CARD_NO_IMAGE = '''                <a href="{folder}/{file}" class="arti
                     </div>
                 </a>'''
 
+# ============================================
+# 导航栏模板（自动注入）
+# ============================================
+
+NAVBAR_CSS = '''
+        /* 导航栏 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-bar .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .nav-bar .logo:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-bar .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-bar .back-link:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateX(-3px);
+        }
+'''
+
+NAVBAR_HTML = '''    <nav class="nav-bar">
+        <a href="../index.html" class="logo">🦞 ClawUtil</a>
+        <a href="../index.html" class="back-link">← 返回列表</a>
+    </nav>
+'''
+
 # 文章内页推荐链接模板
 ARTICLE_LINK_TEMPLATE = """                <a href="{folder}/{file}" class="article-card glass-card border border-slate-700/50 rounded-2xl overflow-hidden block">
                     <div class="{card_class}">
@@ -544,6 +600,33 @@ def update_article_footer(article, site):
     
     return True
 
+def inject_navbar(article):
+    """自动注入导航栏（如果不存在）"""
+    article_path = ARTICLES_DIR / article['folder'] / article['file']
+    if not article_path.exists():
+        return False
+    
+    with open(article_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # 检查是否已有导航栏
+    if 'class="nav-bar"' in content or 'class="back-link"' in content:
+        return False  # 已有导航栏，跳过
+    
+    # 注入 CSS（在 </style> 前）
+    if '</style>' in content:
+        content = content.replace('</style>', NAVBAR_CSS + '\n    </style>')
+    
+    # 注入 HTML（在 <body> 后，<header> 前）
+    if '<body>' in content and '<header>' in content:
+        content = content.replace('<body>\n    <header>', '<body>\n' + NAVBAR_HTML + '\n    <header>')
+    
+    with open(article_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+    
+    print(f"✅ 注入导航栏: {article['title']}")
+    return True
+
 def main():
     """主函数"""
     parser = argparse.ArgumentParser(description='文章站点生成器')
@@ -583,6 +666,7 @@ def main():
         article = next((a for a in articles if a['id'] == args.article), None)
         if article:
             print(f"\n📝 更新文章: {article['title']}")
+            inject_navbar(article)  # 自动注入导航栏
             update_article_recommendations(article, articles)
             update_article_footer(article, site)
         else:
@@ -592,6 +676,7 @@ def main():
         print("\n📝 更新文章内容...")
         for article in articles:
             if article.get('published', True):
+                inject_navbar(article)  # 自动注入导航栏
                 update_article_recommendations(article, articles)
                 update_article_footer(article, site)
     
