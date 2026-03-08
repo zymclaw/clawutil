@@ -36,6 +36,49 @@
             padding: 20px;
         }
 
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-bar .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .nav-bar .logo:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-bar .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-bar .back-link:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateX(-3px);
+        }
+
         header {
             text-align: center;
             padding: 40px 0;
@@ -263,6 +306,10 @@
     </style>
 </head>
 <body>
+    <nav class="nav-bar">
+        <a href="../index.html" class="logo">🦞 ClawUtil</a>
+        <a href="../index.html" class="back-link">← 返回列表</a>
+    </nav>
     <header>
         <h1>OpenClaw 2026.3.7 正式版发布解读</h1>
         <p class="subtitle">Context Engine 插件化、web_search 升级、安全加固</p>
