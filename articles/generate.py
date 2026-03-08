@@ -5,19 +5,289 @@
 用法：
   python3 generate.py              # 生成 index.html 和更新所有文章的推荐链接
   python3 generate.py --article tavily-config  # 更新指定文章的推荐链接
+  python3 generate.py --index-only  # 仅生成 index.html
 
 数据源：articles.json
 """
 
 import json
 import os
+import argparse
 from datetime import datetime
 from pathlib import Path
 
 # 配置
 ARTICLES_DIR = Path(__file__).parent
 DATA_FILE = ARTICLES_DIR / "articles.json"
-INDEX_TEMPLATE = ARTICLES_DIR / "templates" / "index.html"
+INDEX_FILE = ARTICLES_DIR / "index.html"
+
+# ============================================
+# HTML 模板
+# ============================================
+
+INDEX_TEMPLATE = '''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{site_title} - OpenClaw 工具与文章</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {{
+            theme: {{
+                extend: {{
+                    colors: {{
+                        slate: {{
+                            850: '#1e293b',
+                            900: '#0f172a',
+                        }}
+                    }},
+                    animation: {{
+                        'float': 'float 20s infinite linear',
+                        'pulse-slow': 'pulse 3s infinite',
+                    }},
+                    keyframes: {{
+                        float: {{
+                            '0%, 100%': {{ transform: 'translateY(100vh) translateX(0)', opacity: '0' }},
+                            '10%, 90%': {{ opacity: '1' }},
+                            '50%': {{ transform: 'translateY(50vh) translateX(50px)' }},
+                        }}
+                    }}
+                }}
+            }}
+        }}
+    </script>
+    <style>
+        .bg-grid {{
+            background-image: 
+                linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }}
+        .gradient-text {{
+            background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }}
+        .glass-card {{
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+        }}
+        .article-card {{
+            transition: all 0.3s ease;
+        }}
+        .article-card:hover {{
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }}
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200 min-h-screen relative overflow-x-hidden">
+
+    <!-- 背景网格 -->
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+    
+    <!-- 浮动粒子 -->
+    <div id="particles" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
+
+    <!-- 主内容 -->
+    <main class="relative z-20 max-w-5xl mx-auto px-6 py-12">
+        
+        <!-- 头部 -->
+        <header class="text-center mb-16">
+            <div class="flex justify-center items-center gap-4 mb-6">
+                <span class="text-6xl">🦞</span>
+                <div class="text-left">
+                    <h1 class="text-4xl md:text-5xl font-extrabold gradient-text">{site_title}</h1>
+                    <p class="text-slate-400">{site_subtitle}</p>
+                </div>
+            </div>
+            
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+                OpenClaw AI 助手的实战经验、故障排查指南、工具脚本与最佳实践
+            </p>
+            
+            <div class="flex justify-center gap-6 mt-8 text-sm">
+                <a href="{github_url}" class="flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="https://openclaw.ai" class="flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                    OpenClaw
+                </a>
+                <a href="https://clawhub.ai" class="flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    ClawHub
+                </a>
+            </div>
+        </header>
+
+        <!-- 文章列表 -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="w-1 h-8 bg-gradient-to-b from-cyan-400 to-emerald-500 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-white">📝 技术文章</h2>
+            </div>
+            
+            <div class="grid gap-6">
+{article_cards}
+                <!-- 占位卡片 - 即将发布 -->
+                <div class="article-card glass-card border border-slate-700/50 rounded-2xl p-6 opacity-50">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="bg-slate-700 text-slate-400 px-3 py-1 rounded-full text-xs font-semibold">
+                            即将发布
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-400 mb-2">
+                        更多精彩文章正在路上...
+                    </h3>
+                    <p class="text-slate-500">
+                        敬请期待更多 OpenClaw 实战教程、工具脚本和最佳实践分享
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 分类标签 -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="w-1 h-8 bg-gradient-to-b from-cyan-400 to-emerald-500 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-white">🏷️ 分类标签</h2>
+            </div>
+            
+            <div class="flex flex-wrap gap-3">
+{category_tags}
+            </div>
+        </section>
+
+        <!-- 快速链接 -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="w-1 h-8 bg-gradient-to-b from-cyan-400 to-emerald-500 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-white">🔗 快速链接</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <a href="https://openclaw.ai" class="glass-card border border-slate-700/50 rounded-xl p-5 hover:border-cyan-500/50 transition-all group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-2xl">🦞</span>
+                        <h3 class="font-bold text-white group-hover:text-cyan-400 transition-colors">OpenClaw 官网</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm">打造你的 AI 私人助理</p>
+                </a>
+                
+                <a href="https://clawhub.ai" class="glass-card border border-slate-700/50 rounded-xl p-5 hover:border-emerald-500/50 transition-all group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-2xl">🏪</span>
+                        <h3 class="font-bold text-white group-hover:text-emerald-400 transition-colors">ClawHub 技能市场</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm">发现和分享 AI 技能</p>
+                </a>
+                
+                <a href="https://docs.openclaw.ai" class="glass-card border border-slate-700/50 rounded-xl p-5 hover:border-purple-500/50 transition-all group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-2xl">📚</span>
+                        <h3 class="font-bold text-white group-hover:text-purple-400 transition-colors">OpenClaw 文档</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm">完整的使用指南和 API 文档</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="text-center text-slate-500 pt-8 border-t border-slate-800">
+            <p>© {year} {site_title}. 保留所有权利。</p>
+            <p class="mt-2 text-sm">The lobster grows stronger. 🦞</p>
+            <div class="flex justify-center gap-6 mt-6">
+                <a href="{github_url}" class="hover:text-cyan-400 transition-colors">GitHub</a>
+                <a href="https://openclaw.ai" class="hover:text-cyan-400 transition-colors">OpenClaw</a>
+                <a href="https://clawhub.ai" class="hover:text-cyan-400 transition-colors">ClawHub</a>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // 生成背景粒子
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {{
+            const particle = document.createElement('div');
+            particle.className = 'absolute w-1 h-1 bg-cyan-400/40 rounded-full animate-float';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }}
+    </script>
+</body>
+</html>'''
+
+# 文章卡片模板（有封面图）
+ARTICLE_CARD_WITH_IMAGE = '''                <a href="{folder}/{file}" class="article-card glass-card border border-slate-700/50 rounded-2xl overflow-hidden block">
+                    <div class="md:flex">
+                        <div class="md:w-64 md:flex-shrink-0">
+                            <img src="{folder}/{cover_image}" alt="{title}" class="w-full h-48 md:h-full object-cover">
+                        </div>
+                        <div class="p-6 flex-1">
+                            <div class="flex items-center gap-2 mb-3">
+{tags}
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 hover:text-cyan-400 transition-colors">
+                                {title}
+                            </h3>
+                            <p class="text-slate-400 mb-4 line-clamp-2">
+                                {description}
+                            </p>
+                            <div class="flex items-center justify-between text-sm text-slate-500">
+                                <div class="flex items-center gap-4">
+                                    <span class="flex items-center gap-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        {date}
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                        {read_time}
+                                    </span>
+                                </div>
+                                <span class="text-cyan-400 hover:underline">阅读全文 →</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>'''
+
+# 文章卡片模板（无封面图）
+ARTICLE_CARD_NO_IMAGE = '''                <a href="{folder}/{file}" class="article-card glass-card border border-slate-700/50 rounded-2xl overflow-hidden block">
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+{tags}
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 hover:text-cyan-400 transition-colors">
+                            {title}
+                        </h3>
+                        <p class="text-slate-400 mb-4 line-clamp-2">
+                            {description}
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-slate-500">
+                            <div class="flex items-center gap-4">
+                                <span class="flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                    {date}
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    {read_time}
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                    {author}
+                                </span>
+                            </div>
+                            <span class="text-cyan-400 hover:underline">阅读全文 →</span>
+                        </div>
+                    </div>
+                </a>'''
+
+# 文章内页推荐链接模板
 ARTICLE_LINK_TEMPLATE = """                <a href="{folder}/{file}" class="article-card glass-card border border-slate-700/50 rounded-2xl overflow-hidden block">
                     <div class="{card_class}">
                         {cover_image}
@@ -49,20 +319,44 @@ ARTICLE_LINK_TEMPLATE = """                <a href="{folder}/{file}" class="arti
                     </div>
                 </a>"""
 
+# ============================================
+# 工具函数
+# ============================================
+
 def load_data():
     """加载文章数据"""
     with open(DATA_FILE, 'r', encoding='utf-8') as f:
         return json.load(f)
 
-def generate_tag_html(tags, category):
-    """生成标签 HTML"""
+def get_category_color(category):
+    """获取分类对应的颜色"""
     colors = {
         "配置指南": "from-blue-500/20 to-cyan-500/20 text-blue-400 border-blue-500/30",
         "故障排查": "from-cyan-500/20 to-emerald-500/20 text-cyan-400 border-cyan-500/30",
         "技术教程": "from-purple-500/20 to-pink-500/20 text-purple-400 border-purple-500/30",
+        "最佳实践": "from-orange-500/20 to-amber-500/20 text-orange-400 border-orange-500/30",
+        "工具脚本": "from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30",
     }
-    
-    html = f'<span class="bg-gradient-to-r {colors.get(category, "from-slate-500/20 to-slate-500/20 text-slate-400 border-slate-500/30")} px-3 py-1 rounded-full text-xs font-semibold border">\n'
+    return colors.get(category, "from-slate-500/20 to-slate-500/20 text-slate-400 border-slate-500/30")
+
+def get_tag_color(tag):
+    """获取标签对应的颜色"""
+    colors = [
+        "border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10",
+        "border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10",
+        "border-purple-500/30 text-purple-400 hover:bg-purple-500/10",
+        "border-pink-500/30 text-pink-400 hover:bg-pink-500/10",
+        "border-orange-500/30 text-orange-400 hover:bg-orange-500/10",
+        "border-blue-500/30 text-blue-400 hover:bg-blue-500/10",
+        "border-amber-500/30 text-amber-400 hover:bg-amber-500/10",
+    ]
+    # 使用 hash 来确保同一标签颜色一致
+    idx = hash(tag) % len(colors)
+    return colors[idx]
+
+def generate_tag_html(tags, category):
+    """生成标签 HTML"""
+    html = f'                                <span class="bg-gradient-to-r {get_category_color(category)} px-3 py-1 rounded-full text-xs font-semibold border">\n'
     html += f'                                    {category}\n'
     html += f'                                </span>\n'
     
@@ -73,40 +367,107 @@ def generate_tag_html(tags, category):
     
     return html
 
-def generate_article_card(article, has_image=False):
+def generate_article_card(article, site):
     """生成文章卡片 HTML"""
     tags_html = generate_tag_html(article['tags'], article['category'])
     
-    date = article['date'].split('-')[1] + '-' + article['date'].split('-')[2]  # MM-DD
-    date_display = article['date'][5:]  # YYYY-MM-DD -> MM-DD
-    
-    if has_image and article.get('coverImage'):
-        card_class = ""
-        flex_class = " flex-1"
-        cover_image = f'<div class="md:w-64 md:flex-shrink-0">\n                            <img src="{article["folder"]}/{article["coverImage"]}" alt="{article["title"]}" class="w-full h-48 md:h-full object-cover">\n                        </div>'
-        author_span = ""
+    if article.get('coverImage'):
+        # 有封面图的卡片
+        return ARTICLE_CARD_WITH_IMAGE.format(
+            folder=article['folder'],
+            file=article['file'],
+            title=article['title'],
+            description=article['description'],
+            date=article['date'],
+            read_time=article['readTime'] + ' 阅读',
+            tags=tags_html,
+            cover_image=article['coverImage']
+        )
     else:
-        card_class = "p-6"
-        flex_class = ""
-        cover_image = ""
-        author_span = '<span class="flex items-center gap-1">\n                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>\n                                        龙虾\n                                    </span>'
+        # 无封面图的卡片
+        return ARTICLE_CARD_NO_IMAGE.format(
+            folder=article['folder'],
+            file=article['file'],
+            title=article['title'],
+            description=article['description'],
+            date=article['date'],
+            read_time=article['readTime'] + ' 阅读',
+            tags=tags_html,
+            author=site['author']
+        )
+
+def generate_category_tags(articles):
+    """生成分类标签 HTML"""
+    # 收集所有标签
+    all_tags = set()
+    all_categories = set()
     
-    return ARTICLE_LINK_TEMPLATE.format(
-        folder=article['folder'],
-        file=article['file'],
-        title=article['title'],
-        description=article['description'],
-        date=article['date'],
-        readTime=article['readTime'] + '阅读',
-        tags=tags_html,
-        card_class=card_class,
-        flex_class=flex_class,
-        cover_image=cover_image,
-        author_span=author_span
+    for article in articles:
+        if article.get('published', True):
+            all_categories.add(article['category'])
+            for tag in article.get('tags', []):
+                all_tags.add(tag)
+    
+    html_lines = []
+    
+    # 分类颜色映射（用于标签展示）
+    category_tag_colors = {
+        "配置指南": "border-blue-500/30 text-blue-400 hover:bg-blue-500/10",
+        "故障排查": "border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10",
+        "技术教程": "border-purple-500/30 text-purple-400 hover:bg-purple-500/10",
+        "最佳实践": "border-orange-500/30 text-orange-400 hover:bg-orange-500/10",
+        "工具脚本": "border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10",
+    }
+    
+    # 先添加分类
+    for category in sorted(all_categories):
+        color = category_tag_colors.get(category, "border-slate-500/30 text-slate-400 hover:bg-slate-500/10")
+        html_lines.append(f'                <span class="glass-card {color} px-4 py-2 rounded-full text-sm cursor-pointer transition-all">')
+        html_lines.append(f'                    # {category}')
+        html_lines.append('                </span>')
+    
+    # 再添加标签
+    for tag in sorted(all_tags):
+        tag_color = get_tag_color(tag)
+        html_lines.append(f'                <span class="glass-card {tag_color} px-4 py-2 rounded-full text-sm cursor-pointer transition-all">')
+        html_lines.append(f'                    # {tag}')
+        html_lines.append('                </span>')
+    
+    return '\n'.join(html_lines)
+
+def generate_index_html(data):
+    """生成 index.html"""
+    site = data['site']
+    articles = data['articles']
+    
+    # 按日期排序（最新在前）
+    articles_sorted = sorted(articles, key=lambda x: x['date'], reverse=True)
+    
+    # 只处理已发布的文章
+    published_articles = [a for a in articles_sorted if a.get('published', True)]
+    
+    # 生成文章卡片
+    article_cards = []
+    for article in published_articles:
+        article_cards.append(generate_article_card(article, site))
+    
+    # 生成分类标签
+    category_tags = generate_category_tags(published_articles)
+    
+    # 填充模板
+    html = INDEX_TEMPLATE.format(
+        site_title=site['title'],
+        site_subtitle=site['subtitle'],
+        github_url=site['github'],
+        year=datetime.now().year,
+        article_cards='\n'.join(article_cards),
+        category_tags=category_tags
     )
+    
+    return html
 
 def generate_recommendations(current_id, articles):
-    """生成推荐文章列表"""
+    """生成推荐文章列表（用于文章内页）"""
     html = """        <section class="recommendations">
             <h3>📖 更多文章</h3>
             <ul>
@@ -126,7 +487,7 @@ def update_article_recommendations(article, all_articles):
     """更新单篇文章的推荐链接"""
     article_path = ARTICLES_DIR / article['folder'] / article['file']
     if not article_path.exists():
-        print(f"⚠️ 文章文件不存在: {article_path}")
+        print(f"⚠️  文章文件不存在: {article_path}")
         return False
     
     with open(article_path, 'r', encoding='utf-8') as f:
@@ -140,7 +501,7 @@ def update_article_recommendations(article, all_articles):
     end = content.find(end_marker, start) + len(end_marker)
     
     if start == -1:
-        print(f"⚠️ 未找到推荐区域: {article_path}")
+        print(f"⚠️  未找到推荐区域: {article_path}")
         return False
     
     new_recommendations = generate_recommendations(article['id'], all_articles)
@@ -185,7 +546,12 @@ def update_article_footer(article, site):
 
 def main():
     """主函数"""
-    print("🦞 文章站点生成器")
+    parser = argparse.ArgumentParser(description='文章站点生成器')
+    parser.add_argument('--article', '-a', help='只更新指定文章的推荐链接')
+    parser.add_argument('--index-only', '-i', action='store_true', help='只生成 index.html')
+    args = parser.parse_args()
+    
+    print("🦞 ClawUtil 文章站点生成器")
     print("=" * 50)
     
     data = load_data()
@@ -195,19 +561,46 @@ def main():
     # 按日期排序（最新在前）
     articles.sort(key=lambda x: x['date'], reverse=True)
     
-    print(f"\n📚 共 {len(articles)} 篇文章")
+    published_count = sum(1 for a in articles if a.get('published', True))
+    print(f"\n📚 共 {len(articles)} 篇文章，{published_count} 篇已发布")
     
-    # 更新所有文章的推荐链接和页脚
-    print("\n📝 更新文章内容...")
-    for article in articles:
-        if article.get('published', True):
+    # 生成 index.html
+    print("\n📄 生成 index.html...")
+    html_content = generate_index_html(data)
+    
+    with open(INDEX_FILE, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
+    print(f"✅ 已生成: {INDEX_FILE}")
+    
+    if args.index_only:
+        print("\n✅ 完成！（仅生成 index.html）")
+        return
+    
+    # 更新文章推荐链接
+    if args.article:
+        # 只更新指定文章
+        article = next((a for a in articles if a['id'] == args.article), None)
+        if article:
+            print(f"\n📝 更新文章: {article['title']}")
             update_article_recommendations(article, articles)
             update_article_footer(article, site)
+        else:
+            print(f"⚠️  未找到文章: {args.article}")
+    else:
+        # 更新所有文章
+        print("\n📝 更新文章内容...")
+        for article in articles:
+            if article.get('published', True):
+                update_article_recommendations(article, articles)
+                update_article_footer(article, site)
     
     print("\n✅ 完成！")
     print("\n💡 提示:")
     print("   - 修改 articles.json 添加/编辑文章信息")
     print("   - 运行 python3 generate.py 更新所有页面")
+    print("   - 运行 python3 generate.py --article <id> 更新指定文章")
+    print("   - 运行 python3 generate.py --index-only 仅生成首页")
 
 if __name__ == '__main__':
     main()
