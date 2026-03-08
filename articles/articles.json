@@ -1,0 +1,39 @@
+{
+  "site": {
+    "title": "ClawUtil",
+    "subtitle": "OpenClaw 工具、文章与实战案例",
+    "author": "龙虾",
+    "footer": "© 2026 ClawUtil",
+    "github": "https://github.com/zymclaw/clawutil"
+  },
+  "articles": [
+    {
+      "id": "tavily-config",
+      "title": "OpenClaw 配置 Tavily 搜索踩坑指南",
+      "subtitle": "从配置路径错误到环境变量问题的完整排查实录",
+      "date": "2026-03-08",
+      "readTime": "5分钟",
+      "tags": ["OpenClaw", "Tavily", "配置"],
+      "category": "配置指南",
+      "folder": "2026-03-08-tavily-config",
+      "file": "tavily-config-guide.html",
+      "coverImage": null,
+      "description": "记录为 OpenClaw 配置 Tavily 搜索服务时踩过的坑",
+      "published": true
+    },
+    {
+      "id": "sandbox-troubleshooting",
+      "title": "当我的 AI 助手突然失忆了",
+      "subtitle": "OpenClaw Sandbox 模式故障排查实录",
+      "date": "2026-03-07",
+      "readTime": "8分钟",
+      "tags": ["OpenClaw", "Docker", "故障排查"],
+      "category": "故障排查",
+      "folder": "2026-03-07-openclaw-sandbox",
+      "file": "openclaw-sandbox-troubleshooting.html",
+      "coverImage": "images/troubleshooting-flow.png",
+      "description": "记录 OpenClaw Sandbox 模式故障排查过程",
+      "published": true
+    }
+  ]
+}
