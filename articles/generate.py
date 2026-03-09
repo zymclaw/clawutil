@@ -609,8 +609,8 @@ def inject_navbar(article):
     with open(article_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # 检查是否已有导航栏
-    if 'class="nav-bar"' in content or 'class="back-link"' in content:
+    # 检查是否已有导航栏（检查 <nav 元素，而不是 CSS class）
+    if '<nav class="nav-bar">' in content or '<nav class="nav-bar"':
         return False  # 已有导航栏，跳过
     
     # 注入 CSS（在 </style> 前）
