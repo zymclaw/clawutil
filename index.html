@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>安全里程碑：ClawHub 与 VirusTotal 达成战略合作 | OpenClaw 新闻</title>
+    <title>ClawUtil - AI 知识博客</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,12 +18,16 @@
                     animation: {
                         'float': 'float 20s infinite linear',
                         'pulse-slow': 'pulse 3s infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
                     },
                     keyframes: {
                         float: {
-                            '0%, 100%': { transform: 'translateY(100vh) translateX(0)', opacity: '0' },
-                            '10%, 90%': { opacity: '1' },
-                            '50%': { transform: 'translateY(50vh) translateX(50px)' },
+                            '0%, 100%': { transform: 'translateY(0) translateX(0)', opacity: '0.3' },
+                            '50%': { transform: 'translateY(-20px) translateX(10px)', opacity: '0.6' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.3)' },
+                            '100%': { boxShadow: '0 0 30px rgba(99, 102, 241, 0.6)' },
                         }
                     }
                 }
@@ -33,18 +37,21 @@
     <style>
         .bg-grid {
             background-image: 
-                linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
         }
         .gradient-text {
-            background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .glass-card {
             background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(10px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(251, 191, 36, 0.05) 100%);
         }
     </style>
 </head>
@@ -53,241 +60,273 @@
     <!-- 背景网格 -->
     <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
     
-    <!-- 浮动粒子 -->
-    <div id="particles" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
+    <!-- 浮动装饰 -->
+    <div class="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+        <div class="absolute top-20 left-10 w-64 h-64 rounded-full bg-indigo-500/10 blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl animate-float" style="animation-delay: -10s;"></div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="relative z-30 border-b border-slate-700/50 glass-card">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-3xl">🦞</span>
+                <div>
+                    <div class="text-xl font-bold text-white">ClawUtil</div>
+                    <div class="text-xs text-slate-400">AI 知识博客</div>
+                </div>
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="milestones/" class="text-slate-300 hover:text-white transition-colors flex items-center gap-2">
+                    <span>🔥</span> 里程碑
+                </a>
+                <a href="articles/" class="text-slate-300 hover:text-white transition-colors flex items-center gap-2">
+                    <span>📚</span> 文章
+                </a>
+                <a href="https://github.com/zymclaw/clawutil" target="_blank" class="text-slate-300 hover:text-white transition-colors flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
 
     <!-- 主内容 -->
-    <main class="relative z-20 max-w-3xl mx-auto px-6 py-12">
+    <main class="relative z-20 max-w-6xl mx-auto px-6 py-12">
         
-        <!-- 头部 -->
-        <header class="text-center mb-16 animate-fade-in">
-            <span class="inline-block bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-5 py-2 rounded-full text-sm font-semibold tracking-wider mb-6 animate-pulse-slow shadow-lg shadow-emerald-500/30">
-                安全保障里程碑
-            </span>
+        <!-- Hero Section -->
+        <section class="text-center mb-16 py-12">
+            <h1 class="text-5xl md:text-6xl font-black gradient-text mb-6">
+                探索 AI 的精神地标
+            </h1>
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-8">
+                从 Transformer 到认知革命，记录人工智能时代的重要里程碑与实战经验
+            </p>
+            <div class="flex justify-center gap-6 text-sm text-slate-500">
+                <span class="flex items-center gap-2"><span class="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></span>10 个里程碑</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></span>4 篇文章</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>1 个工具</span>
+            </div>
+        </section>
+
+        <!-- AI 里程碑时间线入口 -->
+        <section class="mb-16">
+            <a href="milestones/" class="block group">
+                <div class="relative overflow-hidden rounded-3xl border border-indigo-500/30 hover:border-indigo-500/60 transition-all duration-300 hover:-translate-y-1" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);">
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-transparent to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative p-8 md:p-12">
+                        <div class="flex items-start gap-6">
+                            <div class="text-6xl">🔥</div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h2 class="text-2xl md:text-3xl font-bold text-white">AI 发展里程碑时间线</h2>
+                                    <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-xs rounded-full">交互式</span>
+                                </div>
+                                <p class="text-slate-400 mb-4">从 Transformer 到认知革命，见证人工智能如何从实验室走向人类文明的核心舞台</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-slate-700/50 text-slate-300 text-xs rounded">🏗️ Transformer</span>
+                                    <span class="px-2 py-1 bg-slate-700/50 text-slate-300 text-xs rounded">🧠 知识压缩</span>
+                                    <span class="px-2 py-1 bg-slate-700/50 text-slate-300 text-xs rounded">🤖 智能代理</span>
+                                    <span class="px-2 py-1 bg-slate-700/50 text-slate-300 text-xs rounded">🔥 认知革命</span>
+                                </div>
+                            </div>
+                            <div class="text-4xl text-slate-600 group-hover:text-indigo-400 group-hover:translate-x-2 transition-all">→</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <!-- 两列布局：文章 + 工具 -->
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
             
-            <!-- 合作图片 -->
-            <div class="mb-8 group">
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-cyan-500/20">
-                    <img src="virus.png" 
-                         alt="OpenClaw × VirusTotal" 
-                         class="w-full h-auto"
-                         onerror="this.src='https://openclaw.ai/blog/openclaw-virustotal.svg'">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <!-- 文章列表 -->
+            <div class="md:col-span-2">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-3">
+                        <span>📚</span> 技术文章
+                    </h2>
+                    <a href="articles/" class="text-indigo-400 hover:text-indigo-300 text-sm flex items-center gap-1">
+                        查看全部 →
+                    </a>
+                </div>
+                <div class="space-y-4">
+                    
+                    <!-- 文章 1 -->
+                    <a href="articles/2026-03-09-podcast-downloader/podcast-downloader-dev.html" class="block group">
+                        <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-slate-600 transition-all duration-300 hover:-translate-y-0.5">
+                            <div class="flex items-start justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xs text-slate-500">2026-03-09</span>
+                                        <span class="text-xs text-slate-600">•</span>
+                                        <span class="text-xs text-slate-500">15分钟</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-white group-hover:text-indigo-300 transition-colors mb-1">
+                                        Podcast Downloader Skill 开发全记录
+                                    </h3>
+                                    <p class="text-sm text-slate-400 line-clamp-2">从需求分析到技能标准化的完整开发记录，包含技术选型、错误处理、最佳实践</p>
+                                    <div class="flex gap-2 mt-3">
+                                        <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-xs rounded">OpenClaw</span>
+                                        <span class="px-2 py-0.5 bg-blue-500/20 text-blue-300 text-xs rounded">Skill</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 文章 2 -->
+                    <a href="articles/2026-03-08-openclaw-3.7-release/openclaw-3.7-release.html" class="block group">
+                        <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-slate-600 transition-all duration-300 hover:-translate-y-0.5">
+                            <div class="flex items-start justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xs text-slate-500">2026-03-08</span>
+                                        <span class="text-xs text-slate-600">•</span>
+                                        <span class="text-xs text-slate-500">10分钟</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-white group-hover:text-indigo-300 transition-colors mb-1">
+                                        OpenClaw 2026.3.7 正式版发布
+                                    </h3>
+                                    <p class="text-sm text-slate-400 line-clamp-2">Context Engine 插件化、web_search 升级、安全加固</p>
+                                    <div class="flex gap-2 mt-3">
+                                        <span class="px-2 py-0.5 bg-purple-500/20 text-purple-300 text-xs rounded">版本更新</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 文章 3 -->
+                    <a href="articles/2026-03-08-tavily-config/tavily-config-guide.html" class="block group">
+                        <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-slate-600 transition-all duration-300 hover:-translate-y-0.5">
+                            <div class="flex items-start justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xs text-slate-500">2026-03-08</span>
+                                        <span class="text-xs text-slate-600">•</span>
+                                        <span class="text-xs text-slate-500">5分钟</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-white group-hover:text-indigo-300 transition-colors mb-1">
+                                        OpenClaw 配置 Tavily 搜索踩坑指南
+                                    </h3>
+                                    <p class="text-sm text-slate-400 line-clamp-2">从配置路径错误到环境变量问题的完整排查实录</p>
+                                    <div class="flex gap-2 mt-3">
+                                        <span class="px-2 py-0.5 bg-amber-500/20 text-amber-300 text-xs rounded">配置指南</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 文章 4 -->
+                    <a href="articles/2026-03-07-openclaw-sandbox/openclaw-sandbox-troubleshooting.html" class="block group">
+                        <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-slate-600 transition-all duration-300 hover:-translate-y-0.5">
+                            <div class="flex items-start justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xs text-slate-500">2026-03-07</span>
+                                        <span class="text-xs text-slate-600">•</span>
+                                        <span class="text-xs text-slate-500">8分钟</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-white group-hover:text-indigo-300 transition-colors mb-1">
+                                        当我的 AI 助手突然失忆了
+                                    </h3>
+                                    <p class="text-sm text-slate-400 line-clamp-2">OpenClaw Sandbox 模式故障排查实录</p>
+                                    <div class="flex gap-2 mt-3">
+                                        <span class="px-2 py-0.5 bg-red-500/20 text-red-300 text-xs rounded">故障排查</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
                 </div>
             </div>
-
-            <h1 class="text-4xl md:text-5xl font-extrabold gradient-text mb-4 leading-tight">
-                ClawHub 与 VirusTotal 达成战略合作<br>
-                <span class="text-2xl md:text-3xl font-normal text-slate-400">为 AI 技能市场树立安全新标杆</span>
-            </h1>
             
-            <p class="text-xl text-slate-400 mb-8">OpenClaw 引入全球领先威胁情报平台，为所有技能提供自动化安全扫描与 AI 代码分析</p>
-            
-            <div class="flex justify-center gap-8 text-sm text-slate-500">
-                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>2026年2月22日</span>
-                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>安全公告</span>
-                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>OpenClaw 团队</span>
-            </div>
-        </header>
-
-        <!-- 内容卡片 -->
-        <article class="glass-card border border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl mb-8">
-            
-            <p class="text-xl text-slate-300 leading-relaxed mb-8 pb-8 border-b border-slate-700/50">
-                我们很高兴地宣布，OpenClaw 已与 <span class="bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-semibold">VirusTotal</span>（谷歌旗下全球领先的威胁情报平台）达成战略合作伙伴关系。即日起，<span class="bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-semibold">所有提交至 ClawHub 的技能都将接受 VirusTotal 的自动化安全扫描</span>，包括其最新的 Code Insight AI 分析能力。
-            </p>
-
-            <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                <span class="w-1 h-8 bg-gradient-to-b from-cyan-400 to-emerald-500 rounded-full"></span>
-                为什么这对 AI 代理生态至关重要
-            </h2>
-            
-            <p class="text-slate-400 mb-6 leading-relaxed">
-                传统安全模型围绕"锁定"设备建立，但 AI 代理代表根本性的范式转变。与传统软件不同，AI 代理理解自然语言并自主决策，模糊了用户意图与机器执行的边界。<span class="bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-semibold">一个设计不当的 AI 代理可能成为安全漏洞，而设计得当则能彻底改变个人计算体验</span>。
-            </p>
-
-            <blockquote class="bg-gradient-to-r from-cyan-500/10 to-emerald-500/10 border-l-4 border-cyan-400 p-6 rounded-r-xl my-8 relative">
-                <span class="absolute top-2 left-4 text-6xl text-cyan-400/20 font-serif">"</span>
-                <p class="text-slate-300 italic text-lg relative z-10">随着 OpenClaw 生态的发展，攻击面也在扩大。我们已经看到恶意行为者试图利用 AI 代理平台的案例。我们不会等到问题恶化才采取行动。</p>
-            </blockquote>
-
-            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span class="w-1 h-8 bg-gradient-to-b from-cyan-400 to-emerald-500 rounded-full"></span>
-                七层安全防护机制
-            </h2>
-
-            <div class="space-y-4 mb-8">
-                <div class="flex gap-4 p-5 bg-slate-900/50 rounded-xl border-l-4 border-cyan-400 hover:translate-x-2 transition-transform">
-                    <span class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-cyan-600 text-white rounded-full flex items-center justify-center font-bold">1</span>
-                    <div>
-                        <h4 class="text-white font-semibold mb-1">确定性打包</h4>
-                        <p class="text-slate-400 text-sm">技能文件统一打包为 ZIP，包含 _meta.json 发布者信息</p>
+            <!-- 右侧：工具 + 安全公告 -->
+            <div class="space-y-6">
+                
+                <!-- Skills 工具 -->
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-3 mb-4">
+                        <span>🛠️</span> Skills 工具
+                    </h2>
+                    <div class="glass-card border border-slate-700/50 rounded-2xl p-6">
+                        <a href="https://github.com/zymclaw/clawutil/releases/tag/v1.0.1" target="_blank" class="block group">
+                            <div class="flex items-start gap-4">
+                                <div class="text-4xl">🎙️</div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-white group-hover:text-indigo-300 transition-colors">Podcast Downloader</h3>
+                                    <p class="text-sm text-slate-400 mt-1">从小宇宙下载播客音频，自动转换 MP3</p>
+                                    <div class="flex items-center gap-2 mt-2">
+                                        <span class="text-xs text-emerald-400">v1.0.1</span>
+                                        <span class="text-xs text-slate-500">•</span>
+                                        <span class="text-xs text-slate-500">MIT</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="border-t border-slate-700/50 mt-4 pt-4">
+                            <a href="https://github.com/zymclaw/clawutil/tree/main/skills" target="_blank" class="text-sm text-slate-400 hover:text-indigo-300 transition-colors flex items-center gap-1">
+                                查看更多 Skills →
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="flex gap-4 p-5 bg-slate-900/50 rounded-xl border-l-4 border-cyan-400 hover:translate-x-2 transition-transform">
-                    <span class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-cyan-600 text-white rounded-full flex items-center justify-center font-bold">2</span>
-                    <div>
-                        <h4 class="text-white font-semibold mb-1">哈希值计算</h4>
-                        <p class="text-slate-400 text-sm">计算 SHA-256 哈希值，创建唯一数字指纹</p>
+                <!-- 安全公告 -->
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-3 mb-4">
+                        <span>🔐</span> 安全公告
+                    </h2>
+                    <div class="glass-card border border-emerald-500/30 rounded-2xl p-6" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(6, 182, 212, 0.02) 100%);">
+                        <div class="flex items-start gap-4">
+                            <div class="text-3xl">🛡️</div>
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h3 class="font-semibold text-white">ClawHub × VirusTotal</h3>
+                                    <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-xs rounded">战略合作</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mt-1">所有提交至 ClawHub 的技能都将接受 VirusTotal 自动化安全扫描</p>
+                                <a href="https://openclaw.ai/blog/openclaw-virustotal" target="_blank" class="text-sm text-emerald-400 hover:text-emerald-300 mt-2 inline-block">
+                                    了解更多 →
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="flex gap-4 p-5 bg-slate-900/50 rounded-xl border-l-4 border-cyan-400 hover:translate-x-2 transition-transform">
-                    <span class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-cyan-600 text-white rounded-full flex items-center justify-center font-bold">3</span>
-                    <div>
-                        <h4 class="text-white font-semibold mb-1">VirusTotal 查询</h4>
-                        <p class="text-slate-400 text-sm">自动查询数据库，如有 Code Insight 结果立即返回</p>
+                
+                <!-- 关于 -->
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-3 mb-4">
+                        <span>🦞</span> 关于
+                    </h2>
+                    <div class="glass-card border border-slate-700/50 rounded-2xl p-6">
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            ClawUtil 是一个 AI 知识博客，记录 OpenClaw 开发经验、技术文章和实用工具。
+                        </p>
+                        <div class="flex gap-3 mt-4">
+                            <a href="https://openclaw.ai" target="_blank" class="text-sm text-indigo-400 hover:text-indigo-300">OpenClaw</a>
+                            <span class="text-slate-600">•</span>
+                            <a href="https://clawhub.ai" target="_blank" class="text-sm text-indigo-400 hover:text-indigo-300">ClawHub</a>
+                            <span class="text-slate-600">•</span>
+                            <a href="https://github.com/zymclaw/clawutil" target="_blank" class="text-sm text-indigo-400 hover:text-indigo-300">GitHub</a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="flex gap-4 p-5 bg-slate-900/50 rounded-xl border-l-4 border-cyan-400 hover:translate-x-2 transition-transform">
-                    <span class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-cyan-600 text-white rounded-full flex items-center justify-center font-bold">4</span>
-                    <div>
-                        <h4 class="text-white font-semibold mb-1">上传与分析</h4>
-                        <p class="text-slate-400 text-sm">通过 VirusTotal v3 API 上传进行全新扫描</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 p-5 bg-slate-900/50 rounded-xl border-l-4 border-cyan-400 hover:translate-x-2 transition-transform">
-                    <span class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-cyan-600 text-white rounded-full flex items-center justify-center font-bold">5</span>
-                    <div>
-                        <h4 class="text-white font-semibold mb-1">Code Insight AI 分析</h4>
-                        <p class="text-slate-400 text-sm">Gemini 驱动，从安全角度分析代码实际行为</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 p-5 bg-slate-900/50 rounded-xl border-l-4 border-cyan-400 hover:translate-x-2 transition-transform">
-                    <span class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-cyan-600 text-white rounded-full flex items-center justify-center font-bold">6</span>
-                    <div>
-                        <h4 class="text-white font-semibold mb-1">自动审批与拦截</h4>
-                        <p class="text-slate-400 text-sm">良性自动通过，可疑标记警告，恶意立即阻断</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 p-5 bg-slate-900/50 rounded-xl border-l-4 border-cyan-400 hover:translate-x-2 transition-transform">
-                    <span class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-cyan-600 text-white rounded-full flex items-center justify-center font-bold">7</span>
-                    <div>
-                        <h4 class="text-white font-semibold mb-1">每日重新扫描</h4>
-                        <p class="text-slate-400 text-sm">检测先前安全技能是否被篡改或更新后变为恶意</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6 mb-8">
-                <h3 class="text-amber-400 font-bold mb-3 flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-                    重要说明：这不是万能药
-                </h3>
-                <p class="text-slate-300">VirusTotal 扫描无法捕获所有威胁。通过自然语言指示代理执行恶意操作的技能不会触发病毒特征码。安全是纵深防御，这只是第一层防护。</p>
-            </div>
-
-            <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                <span class="w-1 h-8 bg-gradient-to-b from-cyan-400 to-emerald-500 rounded-full"></span>
-                提供的实际保护
-            </h2>
-
-            <ul class="space-y-3 mb-8">
-                <li class="flex items-start gap-3 text-slate-300 hover:text-white transition-colors">
-                    <span class="text-emerald-400 font-bold text-xl">✓</span>
-                    <span><strong class="text-white">已知恶意软件检测</strong> — 木马、窃取器、后门、恶意载荷</span>
-                </li>
-                <li class="flex items-start gap-3 text-slate-300 hover:text-white transition-colors">
-                    <span class="text-emerald-400 font-bold text-xl">✓</span>
-                    <span><strong class="text-white">行为分析</strong> — Code Insight 识别新型威胁中的可疑模式</span>
-                </li>
-                <li class="flex items-start gap-3 text-slate-300 hover:text-white transition-colors">
-                    <span class="text-emerald-400 font-bold text-xl">✓</span>
-                    <span><strong class="text-white">供应链可见性</strong> — 捕获受损依赖项和嵌入式可执行文件</span>
-                </li>
-                <li class="flex items-start gap-3 text-slate-300 hover:text-white transition-colors">
-                    <span class="text-emerald-400 font-bold text-xl">✓</span>
-                    <span><strong class="text-white">安全意图信号</strong> — 表明我们对安全的投入，这只是众多防护层的第一步</span>
-                </li>
-            </ul>
-
-            <div class="flex flex-wrap gap-2 mb-8">
-                <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full text-sm">威胁模型白皮书</span>
-                <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full text-sm">公开安全路线图</span>
-                <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full text-sm">全代码库安全审计</span>
-                <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full text-sm">正式漏洞报告流程</span>
-            </div>
-
-            <blockquote class="bg-gradient-to-r from-cyan-500/10 to-emerald-500/10 border-l-4 border-cyan-400 p-6 rounded-r-xl relative">
-                <span class="absolute top-2 left-4 text-6xl text-cyan-400/20 font-serif">"</span>
-                <p class="text-slate-300 italic text-lg relative z-10">感谢 Bernardo Quintero 和 VirusTotal 团队的合作伙伴关系。他们的平台每天保护数百万用户，我们很自豪能将这种保护带给 OpenClaw 社区。</p>
-            </blockquote>
-        </article>
-
-        <!-- 文章入口 -->
-        <div class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-3xl p-10 text-center mb-12">
-            <h2 class="text-2xl font-bold text-white mb-4">📝 技术文章与实战案例</h2>
-            <p class="text-slate-400 mb-8">OpenClaw 使用经验、故障排查指南、工具脚本与最佳实践分享</p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="articles/" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-purple-500/30 hover:-translate-y-0.5 hover:shadow-purple-500/50 transition-all">
-                    浏览文章列表
-                </a>
+                
             </div>
         </div>
 
-        <!-- CTA 区域 -->
-        <div class="bg-gradient-to-r from-cyan-500/10 to-emerald-500/10 border border-cyan-500/20 rounded-3xl p-10 text-center mb-12">
-            <h2 class="text-2xl font-bold text-white mb-4">加入最安全的 AI 代理平台</h2>
-            <p class="text-slate-400 mb-8">这只是开始，而非结束。我们致力于使 OpenClaw 成为最安全的 AI 代理平台。</p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://clawhub.ai" class="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-cyan-500/30 hover:-translate-y-0.5 hover:shadow-cyan-500/50 transition-all">
-                    浏览安全技能市场
-                </a>
-                <a href="https://trust.openclaw.ai" class="border-2 border-cyan-500 text-cyan-400 px-8 py-4 rounded-full font-semibold hover:bg-cyan-500/10 transition-all">
-                    查看安全计划详情
-                </a>
-            </div>
-            
-            <p class="mt-8 text-sm text-slate-500">
-                安全问题请联系：<a href="mailto:security@openclaw.ai" class="text-cyan-400 hover:underline">security@openclaw.ai</a>
-            </p>
-        </div>
-
-        <!-- 页脚 -->
-        <footer class="text-center text-slate-500 pt-8 border-t border-slate-800">
-            <p>© 2026 OpenClaw. 保留所有权利。</p>
-            <p class="mt-2 text-sm">The lobster grows stronger. 🦞</p>
-            <div class="flex justify-center gap-6 mt-6">
-                <a href="#" class="hover:text-cyan-400 transition-colors">Discord</a>
-                <a href="#" class="hover:text-cyan-400 transition-colors">Twitter</a>
-                <a href="#" class="hover:text-cyan-400 transition-colors">GitHub</a>
-            </div>
-        </footer>
     </main>
 
-    <script>
-        // 生成背景粒子
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'absolute w-1 h-1 bg-cyan-400/40 rounded-full animate-float';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 20 + 's';
-            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-            particlesContainer.appendChild(particle);
-        }
+    <!-- Footer -->
+    <footer class="relative z-20 border-t border-slate-700/50 mt-16">
+        <div class="max-w-6xl mx-auto px-6 py-8 text-center text-slate-500 text-sm">
+            <p>© 2026 ClawUtil · Made with 🦞 by zClaw</p>
+        </div>
+    </footer>
 
-        // 滚动显示动画
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-4');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.process-step').forEach((el) => {
-            el.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-500');
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>

@@ -1,0 +1,6 @@
+.DS_Store
+*.DS_Store
+DESIGN-PLAN.md
+node_modules/
+*.log
+*.tmp
