@@ -8,6 +8,20 @@
   },
   "articles": [
     {
+      "id": "podcast-downloader",
+      "title": "Podcast Downloader Skill 开发全记录",
+      "subtitle": "从小宇宙下载播客音频，自动转换 MP3，完整开发过程分享",
+      "date": "2026-03-09",
+      "readTime": "15分钟",
+      "tags": ["OpenClaw", "Skill", "小宇宙", "播客"],
+      "category": "Skill 开发",
+      "folder": "2026-03-09-podcast-downloader",
+      "file": "podcast-downloader-dev.html",
+      "coverImage": null,
+      "description": "从需求分析到技能标准化的完整开发记录，包含技术选型、错误处理、最佳实践。",
+      "published": true
+    },
+    {
       "id": "openclaw-3.7-release",
       "title": "OpenClaw 2026.3.7 正式版发布",
       "subtitle": "Context Engine 插件化、web_search 升级、安全加固",
