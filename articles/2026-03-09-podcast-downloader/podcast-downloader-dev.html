@@ -192,20 +192,18 @@
             </div>
 
             <div class="download-box">
-                <h3>📥 立即下载</h3>
-                <p>获取完整的 Podcast Downloader Skill</p>
-                <a href="https://github.com/zymclaw/clawutil/tree/main/skills/podcast-downloader">GitHub 仓库</a>
-                <a href="https://raw.githubusercontent.com/zymclaw/clawutil/main/skills/podcast-downloader/SKILL.md">直接下载</a>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-number" id="download-count">0</div>
-                        <div>下载次数</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">v1.0</div>
-                        <div>当前版本</div>
-                    </div>
-                </div>
+                <h3>📥 安装命令</h3>
+                <p>一键安装 Podcast Downloader Skill</p>
+                <pre style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; text-align: left; margin: 15px 0; overflow-x: auto;"><code style="color: #fff;"># 方法 1: 从 GitHub Release 下载
+curl -LO https://github.com/zymclaw/clawutil/releases/download/v1.0.0/podcast-downloader-v1.0.0.zip
+unzip podcast-downloader-v1.0.0.zip
+cp -r podcast-downloader ~/.openclaw/workspace/skills/
+
+# 方法 2: 从 Git 仓库克隆
+git clone https://github.com/zymclaw/clawutil.git
+cp -r clawutil/skills/podcast-downloader ~/.openclaw/workspace/skills/</code></pre>
+                <a href="https://github.com/zymclaw/clawutil/releases/tag/v1.0.0" style="background: white; color: #667eea; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; margin: 10px; display: inline-block;">GitHub Release</a>
+                <a href="https://github.com/zymclaw/clawutil/tree/main/skills/podcast-downloader" style="background: rgba(255,255,255,0.2); color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; margin: 10px; display: inline-block;">查看源码</a>
             </div>
 
             <h2>背景故事</h2>
@@ -480,7 +478,7 @@ fi</code></pre>
             </ul>
 
             <!-- recommendations -->
-                            <section class="recommendations">
+                                    <section class="recommendations">
             <h3>📖 更多文章</h3>
             <ul>
                 <li><a href="../2026-03-08-openclaw-3.7-release/openclaw-3.7-release.html">OpenClaw 2026.3.7 正式版发布</a></li>
@@ -502,18 +500,5 @@ fi</code></pre>
             </p>
         </article>
     </div>
-
-    <script>
-        // 下载计数（从 GitHub API 获取）
-        fetch('https://api.github.com/repos/zymclaw/clawutil/contents/skills/podcast-downloader/stats.json')
-            .then(r => r.json())
-            .then(data => {
-                const stats = JSON.parse(atob(data.content));
-                document.getElementById('download-count').textContent = stats.downloads;
-            })
-            .catch(() => {
-                document.getElementById('download-count').textContent = 'N/A';
-            });
-    </script>
 </body>
 </html>
