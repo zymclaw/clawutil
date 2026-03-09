@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日报 - ClawUtil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: { 850: '#1e293b', 900: '#0f172a' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200 min-h-screen">
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="relative z-30 border-b border-slate-700/50 glass-card">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-3xl">🦞</span>
+                <div>
+                    <div class="text-xl font-bold text-white">ClawUtil</div>
+                    <div class="text-xs text-slate-400">AI 知识博客</div>
+                </div>
+            </a>
+            <div class="flex items-center gap-6 text-sm">
+                <a href="index.html" class="text-indigo-400 font-medium">📰 日报</a>
+                <a href="../wiki/index.html" class="text-slate-300 hover:text-white transition-colors">📖 百科</a>
+                <a href="../compare/index.html" class="text-slate-300 hover:text-white transition-colors">🆚 对比</a>
+                <a href="../milestones/" class="text-slate-300 hover:text-white transition-colors">🔥 里程碑</a>
+                <a href="https://github.com/zymclaw/clawutil" target="_blank" class="text-slate-300 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <main class="relative z-20 max-w-4xl mx-auto px-6 py-12">
+        
+        <!-- 头部 -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold gradient-text mb-4">📰 日更文章</h1>
+            <p class="text-slate-400 max-w-2xl mx-auto">
+                记录 AI 工具的每一天探索。每周一三五更新，聚焦工具深潜、速查笔记、对比评测。
+            </p>
+            
+            <!-- 周内容日历 -->
+            <div class="flex justify-center gap-4 mt-8 flex-wrap">
+                <div class="px-4 py-2 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">
+                    🔧 周一 工具深潜
+                </div>
+                <div class="px-4 py-2 bg-amber-500/20 text-amber-300 rounded-lg text-sm">
+                    ⚡ 周三 速查笔记
+                </div>
+                <div class="px-4 py-2 bg-emerald-500/20 text-emerald-300 rounded-lg text-sm">
+                    🔗 周五 工作流/周报
+                </div>
+            </div>
+        </header>
+
+        <!-- 文章列表 -->
+        <section class="space-y-6">
+            
+            <!-- 文章卡片 -->
+            <a href="../articles/2026-03-09-podcast-downloader/podcast-downloader-dev.html" class="block group">
+                <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-0.5">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-xs rounded-full">🔧 工具深潜</span>
+                                <span class="px-3 py-1 bg-slate-700/50 text-slate-300 text-xs rounded-full">OpenClaw</span>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white group-hover:text-indigo-300 transition-colors mb-2">
+                                Podcast Downloader Skill 开发全记录
+                            </h3>
+                            <p class="text-slate-400 line-clamp-2 mb-4">
+                                从需求分析到技能标准化的完整开发记录，包含技术选型、错误处理、最佳实践。
+                            </p>
+                            <div class="flex items-center gap-4 text-sm text-slate-500">
+                                <span>📅 2026-03-09</span>
+                                <span>⏱️ 15分钟</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="../articles/2026-03-08-openclaw-3.7-release/openclaw-3.7-release.html" class="block group">
+                <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-0.5">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="px-3 py-1 bg-amber-500/20 text-amber-300 text-xs rounded-full">⚡ 速查笔记</span>
+                                <span class="px-3 py-1 bg-slate-700/50 text-slate-300 text-xs rounded-full">OpenClaw</span>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white group-hover:text-indigo-300 transition-colors mb-2">
+                                OpenClaw 2026.3.7 正式版发布
+                            </h3>
+                            <p class="text-slate-400 line-clamp-2 mb-4">
+                                Context Engine 插件化、web_search 升级、安全加固，194+ 贡献者参与。
+                            </p>
+                            <div class="flex items-center gap-4 text-sm text-slate-500">
+                                <span>📅 2026-03-08</span>
+                                <span>⏱️ 10分钟</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="../articles/2026-03-08-tavily-config/tavily-config-guide.html" class="block group">
+                <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-0.5">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="px-3 py-1 bg-amber-500/20 text-amber-300 text-xs rounded-full">⚡ 速查笔记</span>
+                                <span class="px-3 py-1 bg-slate-700/50 text-slate-300 text-xs rounded-full">OpenClaw</span>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white group-hover:text-indigo-300 transition-colors mb-2">
+                                OpenClaw 配置 Tavily 搜索踩坑指南
+                            </h3>
+                            <p class="text-slate-400 line-clamp-2 mb-4">
+                                从配置路径错误到环境变量问题的完整排查实录。
+                            </p>
+                            <div class="flex items-center gap-4 text-sm text-slate-500">
+                                <span>📅 2026-03-08</span>
+                                <span>⏱️ 5分钟</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="../articles/2026-03-07-openclaw-sandbox/openclaw-sandbox-troubleshooting.html" class="block group">
+                <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-0.5">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="px-3 py-1 bg-rose-500/20 text-rose-300 text-xs rounded-full">🔧 故障排查</span>
+                                <span class="px-3 py-1 bg-slate-700/50 text-slate-300 text-xs rounded-full">OpenClaw</span>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white group-hover:text-indigo-300 transition-colors mb-2">
+                                当我的 AI 助手突然失忆了
+                            </h3>
+                            <p class="text-slate-400 line-clamp-2 mb-4">
+                                OpenClaw Sandbox 模式故障排查实录。
+                            </p>
+                            <div class="flex items-center gap-4 text-sm text-slate-500">
+                                <span>📅 2026-03-07</span>
+                                <span>⏱️ 8分钟</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+        </section>
+
+        <!-- 分页 -->
+        <div class="flex justify-center mt-12">
+            <div class="text-slate-500 text-sm">
+                共 4 篇文章
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-20 border-t border-slate-700/50 mt-16">
+        <div class="max-w-6xl mx-auto px-6 py-8 text-center text-slate-500 text-sm">
+            <p>© 2026 ClawUtil · Made with 🦞 by zClaw</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw - ClawUtil Wiki</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: { 850: '#1e293b', 900: '#0f172a' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        pre {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Fira Code', 'Monaco', monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200 min-h-screen">
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="relative z-30 border-b border-slate-700/50 glass-card">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-3xl">🦞</span>
+                <div>
+                    <div class="text-xl font-bold text-white">ClawUtil</div>
+                    <div class="text-xs text-slate-400">AI 知识博客</div>
+                </div>
+            </a>
+            <div class="flex items-center gap-6 text-sm">
+                <a href="../daily/index.html" class="text-slate-300 hover:text-white transition-colors">📰 日报</a>
+                <a href="index.html" class="text-indigo-400 font-medium">📖 百科</a>
+                <a href="../compare/index.html" class="text-slate-300 hover:text-white transition-colors">🆚 对比</a>
+                <a href="../milestones/" class="text-slate-300 hover:text-white transition-colors">🔥 里程碑</a>
+                <a href="https://github.com/zymclaw/clawutil" target="_blank" class="text-slate-300 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <main class="relative z-20 max-w-6xl mx-auto px-6 py-12">
+        
+        <!-- 面包屑 -->
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-8">
+            <a href="../index.html" class="hover:text-indigo-400 transition-colors">首页</a>
+            <span>→</span>
+            <a href="index.html" class="hover:text-indigo-400 transition-colors">百科</a>
+            <span>→</span>
+            <span class="text-slate-400">OpenClaw</span>
+        </div>
+
+        <!-- 工具概览卡 -->
+        <div class="glass-card border border-slate-700/50 rounded-3xl p-8 mb-8" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);">
+            <div class="flex items-start gap-6">
+                <div class="text-6xl">🦞</div>
+                <div class="flex-1">
+                    <h1 class="text-3xl font-bold text-white mb-2">OpenClaw</h1>
+                    <p class="text-lg text-slate-400 mb-4">开源 AI Agent 框架，支持多模型、工具调用、会话管理</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-sm rounded-full">#Agent框架</span>
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 text-sm rounded-full">#开源</span>
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-sm rounded-full">#多模型</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-full">#Python</span>
+                        <span class="px-3 py-1 bg-amber-500/20 text-amber-300 text-sm rounded-full">#Node.js</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="https://openclaw.ai" target="_blank" class="px-4 py-2 bg-indigo-500/20 text-indigo-300 rounded-lg hover:bg-indigo-500/30 transition-colors">
+                            🌐 官方网站
+                        </a>
+                        <a href="https://github.com/openclaw/openclaw" target="_blank" class="px-4 py-2 bg-slate-700/50 text-slate-300 rounded-lg hover:bg-slate-700/70 transition-colors">
+                            📦 GitHub
+                        </a>
+                        <a href="https://docs.openclaw.ai" target="_blank" class="px-4 py-2 bg-slate-700/50 text-slate-300 rounded-lg hover:bg-slate-700/70 transition-colors">
+                            📖 文档
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 两列布局 -->
+        <div class="grid md:grid-cols-4 gap-8">
+            
+            <!-- 左侧：快速入口 -->
+            <div class="md:col-span-1">
+                <div class="glass-card border border-slate-700/50 rounded-2xl p-6 sticky top-6">
+                    <h3 class="text-lg font-semibold text-white mb-4">⚡ 快速入口</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#install" class="flex items-center gap-2 text-slate-300 hover:text-indigo-300 transition-colors">
+                                <span>📥</span> 安装指南
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#config" class="flex items-center gap-2 text-slate-300 hover:text-indigo-300 transition-colors">
+                                <span>⚙️</span> 配置文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#commands" class="flex items-center gap-2 text-slate-300 hover:text-indigo-300 transition-colors">
+                                <span>💻</span> 常用命令
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#troubleshoot" class="flex items-center gap-2 text-slate-300 hover:text-indigo-300 transition-colors">
+                                <span>🔧</span> 故障排查
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <hr class="border-slate-700/50 my-6">
+                    
+                    <h3 class="text-lg font-semibold text-white mb-4">🔗 相关工具</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="claude-code.html" class="flex items-center gap-2 text-slate-400 hover:text-indigo-300 transition-colors">
+                                <span>🤖</span> Claude Code
+                            </a>
+                        </li>
+                        <li>
+                            <a href="kimi.html" class="flex items-center gap-2 text-slate-400 hover:text-indigo-300 transition-colors">
+                                <span>🌙</span> Kimi
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <hr class="border-slate-700/50 my-6">
+                    
+                    <h3 class="text-lg font-semibold text-white mb-4">📊 统计</h3>
+                    <div class="space-y-2 text-sm text-slate-400">
+                        <div class="flex justify-between">
+                            <span>文章数</span>
+                            <span class="text-white">4 篇</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>完善度</span>
+                            <span class="text-emerald-400">80%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>最后更新</span>
+                            <span class="text-white">2026-03-09</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧：主要内容 -->
+            <div class="md:col-span-3 space-y-8">
+                
+                <!-- 安装指南 -->
+                <section id="install" class="glass-card border border-slate-700/50 rounded-2xl p-6">
+                    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <span class="w-1 h-6 bg-indigo-500 rounded-full"></span>
+                        📥 安装指南
+                    </h2>
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-white">npm 安装</h3>
+                        <pre><code class="text-emerald-400"># 全局安装
+npm install -g openclaw
+
+# 或者使用 npx
+npx openclaw</code></pre>
+                        
+                        <h3 class="text-lg font-semibold text-white mt-6">Python 安装</h3>
+                        <pre><code class="text-emerald-400"># pip 安装
+pip install openclaw
+
+# 或使用 pipx
+pipx install openclaw</code></pre>
+                        
+                        <h3 class="text-lg font-semibold text-white mt-6">系统要求</h3>
+                        <ul class="list-disc list-inside text-slate-300 space-y-1">
+                            <li>Node.js 18+ 或 Python 3.8+</li>
+                            <li>macOS、Linux、Windows 均支持</li>
+                            <li>可选：Docker（用于 Sandbox 模式）</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <!-- 配置文档 -->
+                <section id="config" class="glass-card border border-slate-700/50 rounded-2xl p-6">
+                    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <span class="w-1 h-6 bg-cyan-500 rounded-full"></span>
+                        ⚙️ 配置文档
+                    </h2>
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-white">配置文件位置</h3>
+                        <pre><code class="text-emerald-400"># 用户级配置
+~/.openclaw/openclaw.json
+
+# 项目级配置
+./openclaw.json</code></pre>
+                        
+                        <h3 class="text-lg font-semibold text-white mt-6">基础配置示例</h3>
+                        <pre><code class="text-emerald-400">{
+  "model": "anthropic/claude-3-sonnet",
+  "agents": {
+    "default": {
+      "model": "anthropic/claude-3-sonnet",
+      "tools": ["web_search", "browser", "exec"]
+    }
+  },
+  "gateway": {
+    "auth": {
+      "mode": "token"
+    }
+  }
+}</code></pre>
+                        
+                        <h3 class="text-lg font-semibold text-white mt-6">常用模型配置</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-slate-700">
+                                        <th class="text-left py-2 text-slate-400">模型</th>
+                                        <th class="text-left py-2 text-slate-400">配置值</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-slate-300">
+                                    <tr class="border-b border-slate-700/50">
+                                        <td class="py-2">Claude 3.5 Sonnet</td>
+                                        <td class="py-2"><code class="text-emerald-400">anthropic/claude-3.5-sonnet</code></td>
+                                    </tr>
+                                    <tr class="border-b border-slate-700/50">
+                                        <td class="py-2">GPT-4o</td>
+                                        <td class="py-2"><code class="text-emerald-400">openai/gpt-4o</code></td>
+                                    </tr>
+                                    <tr class="border-b border-slate-700/50">
+                                        <td class="py-2">DeepSeek V3</td>
+                                        <td class="py-2"><code class="text-emerald-400">deepseek/deepseek-chat</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2">Kimi K2</td>
+                                        <td class="py-2"><code class="text-emerald-400">kimi/kimi-k2</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 常用命令 -->
+                <section id="commands" class="glass-card border border-slate-700/50 rounded-2xl p-6">
+                    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <span class="w-1 h-6 bg-emerald-500 rounded-full"></span>
+                        💻 常用命令
+                    </h2>
+                    <div class="space-y-4">
+                        <pre><code class="text-emerald-400"># 启动 TUI 界面
+openclaw tui
+
+# 查看状态
+openclaw status
+
+# 查看配置
+openclaw config get
+
+# 重启 Gateway
+openclaw gateway restart
+
+# 备份配置
+openclaw backup create
+
+# 验证备份
+openclaw backup verify</code></pre>
+                        
+                        <h3 class="text-lg font-semibold text-white mt-6">Gateway 命令</h3>
+                        <pre><code class="text-emerald-400"># 启动 Gateway
+openclaw gateway start
+
+# 停止 Gateway
+openclaw gateway stop
+
+# 重启 Gateway
+openclaw gateway restart
+
+# 查看 Gateway 状态
+openclaw gateway status</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 故障排查 -->
+                <section id="troubleshoot" class="glass-card border border-slate-700/50 rounded-2xl p-6">
+                    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <span class="w-1 h-6 bg-amber-500 rounded-full"></span>
+                        🔧 故障排查
+                    </h2>
+                    <div class="space-y-6">
+                        
+                        <div class="border-l-2 border-red-500/50 pl-4">
+                            <h3 class="font-semibold text-white mb-2">问题：Sandbox 模式导致 AI 失忆</h3>
+                            <p class="text-slate-400 mb-2">症状：AI 无法记住上下文，每次对话都是新的</p>
+                            <p class="text-emerald-400">解决方案：</p>
+                            <pre class="mt-2"><code class="text-emerald-400"># 方案 1: 关闭 Sandbox
+openclaw config set agents.defaults.sandbox.mode off
+
+# 方案 2: 重启 Gateway
+openclaw gateway restart</code></pre>
+                        </div>
+                        
+                        <div class="border-l-2 border-red-500/50 pl-4">
+                            <h3 class="font-semibold text-white mb-2">问题：Gateway Auth 错误</h3>
+                            <p class="text-slate-400 mb-2">症状：2026.3.8 版本后出现 auth.mode 错误</p>
+                            <p class="text-emerald-400">解决方案：</p>
+                            <pre class="mt-2"><code class="text-emerald-400"># 在 ~/.openclaw/openclaw.json 中添加
+{
+  "gateway": {
+    "auth": {
+      "mode": "token"
+    }
+  }
+}</code></pre>
+                        </div>
+                        
+                        <div class="border-l-2 border-red-500/50 pl-4">
+                            <h3 class="font-semibold text-white mb-2">问题：Tavily 搜索不工作</h3>
+                            <p class="text-slate-400 mb-2">症状：web_search 工具调用失败</p>
+                            <p class="text-emerald-400">解决方案：</p>
+                            <pre class="mt-2"><code class="text-emerald-400"># 检查环境变量
+echo $TAVILY_API_KEY
+
+# 或在配置文件中设置
+{
+  "tools": {
+    "web": {
+      "search": {
+        "provider": "tavily",
+        "apiKey": "tvly-xxx"
+      }
+    }
+  }
+}</code></pre>
+                        </div>
+                        
+                    </div>
+                </section>
+                
+                <!-- 相关文章 -->
+                <section class="glass-card border border-slate-700/50 rounded-2xl p-6">
+                    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <span class="w-1 h-6 bg-rose-500 rounded-full"></span>
+                        📚 相关文章
+                    </h2>
+                    <div class="space-y-4">
+                        <a href="../articles/2026-03-09-podcast-downloader/podcast-downloader-dev.html" class="block group">
+                            <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-700/50 transition-colors">
+                                <div>
+                                    <div class="text-white group-hover:text-indigo-300 transition-colors">Podcast Downloader Skill 开发全记录</div>
+                                    <div class="text-sm text-slate-500 mt-1">2026-03-09 · 15分钟</div>
+                                </div>
+                                <span class="text-slate-400">→</span>
+                            </div>
+                        </a>
+                        <a href="../articles/2026-03-08-openclaw-3.7-release/openclaw-3.7-release.html" class="block group">
+                            <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-700/50 transition-colors">
+                                <div>
+                                    <div class="text-white group-hover:text-indigo-300 transition-colors">OpenClaw 2026.3.7 正式版发布</div>
+                                    <div class="text-sm text-slate-500 mt-1">2026-03-08 · 10分钟</div>
+                                </div>
+                                <span class="text-slate-400">→</span>
+                            </div>
+                        </a>
+                        <a href="../articles/2026-03-08-tavily-config/tavily-config-guide.html" class="block group">
+                            <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-700/50 transition-colors">
+                                <div>
+                                    <div class="text-white group-hover:text-indigo-300 transition-colors">OpenClaw 配置 Tavily 搜索踩坑指南</div>
+                                    <div class="text-sm text-slate-500 mt-1">2026-03-08 · 5分钟</div>
+                                </div>
+                                <span class="text-slate-400">→</span>
+                            </div>
+                        </a>
+                        <a href="../articles/2026-03-07-openclaw-sandbox/openclaw-sandbox-troubleshooting.html" class="block group">
+                            <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-700/50 transition-colors">
+                                <div>
+                                    <div class="text-white group-hover:text-indigo-300 transition-colors">当我的 AI 助手突然失忆了</div>
+                                    <div class="text-sm text-slate-500 mt-1">2026-03-07 · 8分钟</div>
+                                </div>
+                                <span class="text-slate-400">→</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+                
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-20 border-t border-slate-700/50 mt-16">
+        <div class="max-w-6xl mx-auto px-6 py-8 text-center text-slate-500 text-sm">
+            <p>© 2026 ClawUtil · Made with 🦞 by zClaw</p>
+        </div>
+    </footer>
+
+</body>
+</html>

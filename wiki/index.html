@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工具百科 - ClawUtil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: { 850: '#1e293b', 900: '#0f172a' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200 min-h-screen">
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="relative z-30 border-b border-slate-700/50 glass-card">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-3xl">🦞</span>
+                <div>
+                    <div class="text-xl font-bold text-white">ClawUtil</div>
+                    <div class="text-xs text-slate-400">AI 知识博客</div>
+                </div>
+            </a>
+            <div class="flex items-center gap-6 text-sm">
+                <a href="../daily/index.html" class="text-slate-300 hover:text-white transition-colors">📰 日报</a>
+                <a href="index.html" class="text-indigo-400 font-medium">📖 百科</a>
+                <a href="../compare/index.html" class="text-slate-300 hover:text-white transition-colors">🆚 对比</a>
+                <a href="../milestones/" class="text-slate-300 hover:text-white transition-colors">🔥 里程碑</a>
+                <a href="https://github.com/zymclaw/clawutil" target="_blank" class="text-slate-300 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <main class="relative z-20 max-w-6xl mx-auto px-6 py-12">
+        
+        <!-- 头部 -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold gradient-text mb-4">📖 工具百科</h1>
+            <p class="text-slate-400 max-w-2xl mx-auto">
+                AI 工具的百科全书。每个工具包含安装指南、配置文档、常用命令、故障排查。
+            </p>
+        </header>
+
+        <!-- 分类导航 -->
+        <div class="flex justify-center gap-4 mb-12 flex-wrap">
+            <button class="px-4 py-2 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm font-medium">全部</button>
+            <button class="px-4 py-2 bg-slate-700/50 text-slate-300 rounded-lg text-sm hover:bg-slate-700/70 transition-colors">Agent 框架</button>
+            <button class="px-4 py-2 bg-slate-700/50 text-slate-300 rounded-lg text-sm hover:bg-slate-700/70 transition-colors">代码助手</button>
+            <button class="px-4 py-2 bg-slate-700/50 text-slate-300 rounded-lg text-sm hover:bg-slate-700/70 transition-colors">大模型 API</button>
+            <button class="px-4 py-2 bg-slate-700/50 text-slate-300 rounded-lg text-sm hover:bg-slate-700/70 transition-colors">开发工具</button>
+        </div>
+
+        <!-- 工具矩阵 -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- OpenClaw -->
+            <a href="openclaw.html" class="block group">
+                <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1 h-full">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="text-4xl">🦞</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-white group-hover:text-indigo-300 transition-colors">OpenClaw</h3>
+                            <p class="text-sm text-slate-400 mt-1">开源 Agent 框架</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">
+                        强大的 AI Agent 框架，支持多模型、工具调用、会话管理。Python/Node.js 双语言支持。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-indigo-500/20 text-indigo-300 text-xs rounded">Agent框架</span>
+                        <span class="px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs rounded">开源</span>
+                        <span class="px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded">多模型</span>
+                    </div>
+                    <div class="flex items-center gap-4 mt-4 pt-4 border-t border-slate-700/50 text-xs text-slate-500">
+                        <span>📚 4 篇文章</span>
+                        <span>📝 完善度 80%</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Claude Code -->
+            <a href="claude-code.html" class="block group">
+                <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1 h-full opacity-60">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="text-4xl">🤖</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-white group-hover:text-indigo-300 transition-colors">Claude Code</h3>
+                            <p class="text-sm text-slate-400 mt-1">Anthropic 代码助手</p>
+                        </div>
+                        <span class="px-2 py-1 bg-amber-500/20 text-amber-300 text-xs rounded">待完善</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">
+                        Anthropic 官方推出的 AI 编程助手，支持 Plan 模式、代码审查、文件操作。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-indigo-500/20 text-indigo-300 text-xs rounded">代码助手</span>
+                        <span class="px-2 py-1 bg-purple-500/20 text-purple-300 text-xs rounded">Anthropic</span>
+                    </div>
+                    <div class="flex items-center gap-4 mt-4 pt-4 border-t border-slate-700/50 text-xs text-slate-500">
+                        <span>📚 0 篇文章</span>
+                        <span>📝 完善度 10%</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Kimi -->
+            <a href="kimi.html" class="block group">
+                <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1 h-full opacity-60">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="text-4xl">🌙</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-white group-hover:text-indigo-300 transition-colors">Kimi</h3>
+                            <p class="text-sm text-slate-400 mt-1">月之暗面大模型</p>
+                        </div>
+                        <span class="px-2 py-1 bg-amber-500/20 text-amber-300 text-xs rounded">待完善</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">
+                        月之暗面推出的长上下文大模型，支持 200K token，擅长文档处理和长文本理解。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-indigo-500/20 text-indigo-300 text-xs rounded">大模型</span>
+                        <span class="px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded">长上下文</span>
+                    </div>
+                    <div class="flex items-center gap-4 mt-4 pt-4 border-t border-slate-700/50 text-xs text-slate-500">
+                        <span>📚 0 篇文章</span>
+                        <span>📝 完善度 5%</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- DeepSeek -->
+            <a href="deepseek.html" class="block group">
+                <div class="glass-card border border-slate-700/50 rounded-2xl p-6 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1 h-full opacity-60">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="text-4xl">🔍</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-white group-hover:text-indigo-300 transition-colors">DeepSeek</h3>
+                            <p class="text-sm text-slate-400 mt-1">深度求索大模型</p>
+                        </div>
+                        <span class="px-2 py-1 bg-slate-600/50 text-slate-400 text-xs rounded">计划中</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">
+                        国产开源大模型，推理能力强，价格低廉。DeepSeek-V3 和 DeepSeek-R1 备受关注。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-indigo-500/20 text-indigo-300 text-xs rounded">大模型</span>
+                        <span class="px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs rounded">开源</span>
+                    </div>
+                    <div class="flex items-center gap-4 mt-4 pt-4 border-t border-slate-700/50 text-xs text-slate-500">
+                        <span>📚 0 篇文章</span>
+                        <span>📝 完善度 0%</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 更多工具占位 -->
+            <div class="glass-card border border-dashed border-slate-600 rounded-2xl p-6 flex items-center justify-center h-64">
+                <div class="text-center text-slate-500">
+                    <div class="text-4xl mb-2">➕</div>
+                    <p>更多工具即将添加</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- 贡献指南 -->
+        <div class="glass-card border border-slate-700/50 rounded-2xl p-8 mt-12 text-center">
+            <h3 class="text-xl font-semibold text-white mb-2">🤝 参与贡献</h3>
+            <p class="text-slate-400 mb-4">
+                发现错误或有补充内容？欢迎在 GitHub 提交 Issue 或 Pull Request。
+            </p>
+            <a href="https://github.com/zymclaw/clawutil" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-500/20 text-indigo-300 rounded-lg hover:bg-indigo-500/30 transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub 仓库
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-20 border-t border-slate-700/50 mt-16">
+        <div class="max-w-6xl mx-auto px-6 py-8 text-center text-slate-500 text-sm">
+            <p>© 2026 ClawUtil · Made with 🦞 by zClaw</p>
+        </div>
+    </footer>
+
+</body>
+</html>
