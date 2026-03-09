@@ -192,7 +192,7 @@ Xiaoyuzhou CDN has no strict rate limiting, but recommend:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `PODCAST_DIR` | `/Users/zym/Documents/podcast/` | Output directory |
+| `PODCAST_DIR` | `~/Documents/podcast/` | Output directory |
 | `AUDIO_QUALITY` | `0` | ffmpeg `-q:a` value (0-4) |
 | `KEEP_M4A` | `false` | Keep original m4a file |
 

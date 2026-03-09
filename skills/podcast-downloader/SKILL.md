@@ -18,7 +18,7 @@ Download podcast audio and show notes from xiaoyuzhoufm.com (小宇宙).
 ## Output
 
 ```
-/Users/zym/Documents/podcast/  # Baidu cloud sync directory
+~/Documents/podcast/  # Default output directory
 └── PodcastName-EpisodeTitle/
     ├── EpisodeTitle.mp3
     └── EpisodeTitle.md
@@ -42,8 +42,8 @@ Download podcast audio and show notes from xiaoyuzhoufm.com (小宇宙).
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `PODCAST_DIR` | `/Users/zym/Documents/podcast/` | Output directory (Baidu cloud sync) |
-| `AUDIO_QUALITY` | `0` | MP3 quality (0=best, 2=good, 4=normal) |
+| `PODCAST_DIR` | `~/Documents/podcast/` | Output directory |
+| `AUDIO_QUALITY` | `0` | MP3 quality (0=best, 4=normal) |
 | `KEEP_M4A` | `false` | Keep original m4a file |
 
 ## Quick Reference

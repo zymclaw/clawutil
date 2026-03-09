@@ -24,9 +24,9 @@
 
 **安装**：
 ```bash
-# 方法 1: 从 GitHub Release 下载
-curl -LO https://github.com/zymclaw/clawutil/releases/download/v1.0.0/podcast-downloader-v1.0.0.zip
-unzip podcast-downloader-v1.0.0.zip
+# 方法 1: 从 GitHub Release 下载（推荐）
+curl -LO https://github.com/zymclaw/clawutil/releases/download/v1.0.1/podcast-downloader-v1.0.1.zip
+unzip podcast-downloader-v1.0.1.zip
 cp -r podcast-downloader ~/.openclaw/workspace/skills/
 
 # 方法 2: 从 Git 仓库克隆

@@ -3,7 +3,7 @@
 # Usage: ./download.sh <episode_url>
 #
 # Environment Variables:
-#   PODCAST_DIR    Output directory (default: /Users/zym/Documents/podcast/)
+#   PODCAST_DIR    Output directory (default: ~/Documents/podcast/)
 #   AUDIO_QUALITY  MP3 quality 0-4 (default: 0 = best)
 #   KEEP_M4A       Keep m4a file (default: false)
 #
@@ -14,7 +14,7 @@
 set -e
 
 # Default settings
-PODCAST_DIR="${PODCAST_DIR:-/Users/zym/Documents/podcast}"
+PODCAST_DIR="${PODCAST_DIR:-$HOME/Documents/podcast}"
 AUDIO_QUALITY="${AUDIO_QUALITY:-0}"
 KEEP_M4A="${KEEP_M4A:-false}"
 
@@ -31,7 +31,7 @@ usage() {
   echo "Download podcast audio (MP3) and show notes from xiaoyuzhoufm.com"
   echo ""
   echo "Environment Variables:"
-  echo "  PODCAST_DIR    Output directory (default: /Users/zym/Documents/podcast/)"
+  echo "  PODCAST_DIR    Output directory (default: ~/Documents/podcast/)"
   echo "  AUDIO_QUALITY  MP3 quality 0-4 (default: 0 = best)"
   echo "  KEEP_M4A       Keep m4a file (default: false)"
   echo ""
