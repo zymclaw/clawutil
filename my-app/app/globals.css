@@ -1,5 +1,3 @@
-@import '@arco-design/web-react/dist/css/arco.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,17 +28,21 @@
   --gray-10: #1D2129;
 }
 
+/* 确保 Arco 样式优先级 */
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* 滚动条样式 */
@@ -70,21 +72,6 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-/* Arco 组件样式覆盖 */
-.arco-card {
-  border-radius: 8px !important;
-}
-
-.arco-btn {
-  border-radius: 4px !important;
-}
-
-.arco-input,
-.arco-select-view,
-.arco-textarea {
-  border-radius: 4px !important;
 }
 
 /* Markdown 内容样式 */
@@ -189,4 +176,16 @@ body {
 .markdown-body th {
   background: var(--gray-1);
   font-weight: 600;
+}
+
+/* 修复按钮文字对齐问题 */
+.arco-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.arco-btn svg {
+  flex-shrink: 0;
 }

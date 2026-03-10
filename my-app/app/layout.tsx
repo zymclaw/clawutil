@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import '@arco-design/web-react/dist/css/arco.css';
 import './globals.css';
 
 export const metadata: Metadata = {
