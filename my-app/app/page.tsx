@@ -104,22 +104,24 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-16">
           <Title heading={3} className="!mb-8 text-center">快速入口</Title>
           <Row gutter={16}>
-            <Col xs={24} md={8} className="mb-4">
-              <Card 
-                className="h-full hover:shadow-md transition-shadow cursor-pointer"
-                title={
-                  <Space>
-                    <span className="text-2xl">📰</span>
-                    <span>日报文章</span>
-                  </Space>
-                }
-              >
-                <Paragraph className="text-gray-600">
-                  日更技术文章，记录 AI 工具的使用心得与实战经验
-                </Paragraph>
-              </Card>
+            <Col xs={24} md={6} className="mb-4">
+              <Link href="/articles/">
+                <Card 
+                  className="h-full hover:shadow-md transition-shadow cursor-pointer"
+                  title={
+                    <Space>
+                      <span className="text-2xl">📰</span>
+                      <span>日报文章</span>
+                    </Space>
+                  }
+                >
+                  <Paragraph className="text-gray-600">
+                    日更技术文章，记录 AI 工具的使用心得与实战经验
+                  </Paragraph>
+                </Card>
+              </Link>
             </Col>
-            <Col xs={24} md={8} className="mb-4">
+            <Col xs={24} md={6} className="mb-4">
               <Card 
                 className="h-full hover:shadow-md transition-shadow cursor-pointer"
                 title={
@@ -134,7 +136,7 @@ export default function Home() {
                 </Paragraph>
               </Card>
             </Col>
-            <Col xs={24} md={8} className="mb-4">
+            <Col xs={24} md={6} className="mb-4">
               <Card 
                 className="h-full hover:shadow-md transition-shadow cursor-pointer"
                 title={
@@ -148,6 +150,23 @@ export default function Home() {
                   多工具横向对比，帮你选择最适合的 AI 助手
                 </Paragraph>
               </Card>
+            </Col>
+            <Col xs={24} md={6} className="mb-4">
+              <Link href="/milestones/">
+                <Card 
+                  className="h-full hover:shadow-md transition-shadow cursor-pointer border-orange-200"
+                  title={
+                    <Space>
+                      <span className="text-2xl">🔥</span>
+                      <span className="text-orange-600">AI 里程碑</span>
+                    </Space>
+                  }
+                >
+                  <Paragraph className="text-gray-600">
+                    从 Transformer 到认知革命，AI 发展重大事件时间线
+                  </Paragraph>
+                </Card>
+              </Link>
             </Col>
           </Row>
         </div>
