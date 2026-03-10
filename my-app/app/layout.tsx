@@ -14,6 +14,33 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN">
+      <head>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* Arco Design Button Alignment Fix */
+            .arco-btn {
+              display: inline-flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              gap: 6px !important;
+            }
+            .arco-btn svg,
+            .arco-btn .lucide {
+              flex-shrink: 0 !important;
+              width: 16px !important;
+              height: 16px !important;
+            }
+            /* Arco Card Radius */
+            .arco-card {
+              border-radius: 8px !important;
+            }
+            /* Arco Layout Background */
+            .arco-layout {
+              background: #f7f8fa !important;
+            }
+          `
+        }} />
+      </head>
       <body>{children}</body>
     </html>
   );
