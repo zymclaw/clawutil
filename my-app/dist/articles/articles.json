@@ -1,0 +1,71 @@
+{
+  "site": {
+    "title": "ClawUtil",
+    "subtitle": "OpenClaw 工具、文章与实战案例",
+    "author": "龙虾",
+    "footer": "© 2026 ClawUtil",
+    "github": "https://github.com/zymclaw/clawutil"
+  },
+  "articles": [
+    {
+      "id": "podcast-downloader",
+      "title": "Podcast Downloader Skill 开发全记录",
+      "subtitle": "从小宇宙下载播客音频，自动转换 MP3，完整开发过程分享",
+      "date": "2026-03-09",
+      "readTime": "15分钟",
+      "tags": ["OpenClaw", "Skill", "小宇宙", "播客"],
+      "category": "Skill 开发",
+      "folder": "2026-03-09-podcast-downloader",
+      "file": "podcast-downloader-dev.html",
+      "coverImage": null,
+      "description": "从需求分析到技能标准化的完整开发记录，包含技术选型、错误处理、最佳实践。",
+      "published": true,
+      "download": {
+        "version": "v1.0.0",
+        "url": "https://github.com/zymclaw/clawutil/releases/download/v1.0.0/podcast-downloader-v1.0.0.zip"
+      }
+    },
+    {
+      "id": "openclaw-3.7-release",
+      "title": "OpenClaw 2026.3.7 正式版发布",
+      "subtitle": "Context Engine 插件化、web_search 升级、安全加固",
+      "date": "2026-03-08",
+      "readTime": "10分钟",
+      "tags": ["OpenClaw", "版本更新", "安全"],
+      "category": "版本更新",
+      "folder": "2026-03-08-openclaw-3.7-release",
+      "file": "openclaw-3.7-release.html",
+      "coverImage": null,
+      "description": "OpenClaw 2026.3.7 正式版发布！Context Engine 插件化、web_search 升级而非取消、安全加固、Telegram/Discord 改进，194+ 贡献者参与。",
+      "published": true
+    },
+    {
+      "id": "tavily-config",
+      "title": "OpenClaw 配置 Tavily 搜索踩坑指南",
+      "subtitle": "从配置路径错误到环境变量问题的完整排查实录",
+      "date": "2026-03-08",
+      "readTime": "5分钟",
+      "tags": ["OpenClaw", "Tavily", "配置"],
+      "category": "配置指南",
+      "folder": "2026-03-08-tavily-config",
+      "file": "tavily-config-guide.html",
+      "coverImage": null,
+      "description": "记录为 OpenClaw 配置 Tavily 搜索服务时踩过的坑",
+      "published": true
+    },
+    {
+      "id": "sandbox-troubleshooting",
+      "title": "当我的 AI 助手突然失忆了",
+      "subtitle": "OpenClaw Sandbox 模式故障排查实录",
+      "date": "2026-03-07",
+      "readTime": "8分钟",
+      "tags": ["OpenClaw", "Docker", "故障排查"],
+      "category": "故障排查",
+      "folder": "2026-03-07-openclaw-sandbox",
+      "file": "openclaw-sandbox-troubleshooting.html",
+      "coverImage": "images/troubleshooting-flow.png",
+      "description": "记录 OpenClaw Sandbox 模式故障排查过程",
+      "published": true
+    }
+  ]
+}
