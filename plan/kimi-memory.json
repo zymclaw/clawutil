@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "created_at": "2026-03-09T21:04:21+08:00",
+  "last_updated": "2026-03-10T13:25:00+08:00",
+  "project": {
+    "name": "ClawUtil Blog",
+    "type": "personal-ai-tech-blog",
+    "current_phase": "mvp-completed",
+    "github_repo": "https://github.com/zymclaw/clawutil",
+    "production_url": "https://zymclaw.github.io/clawutil/",
+    "mvp_status": "✅ BUILD SUCCESS"
+  },
+  "mvp_summary": {
+    "location": "/git-repos/clawutil/my-app/",
+    "dist_size": "4.2MB",
+    "pages_built": [
+      "/ - 首页",
+      "/admin/ - 管理后台",
+      "/admin/articles/ - 文章列表",
+      "/admin/articles/new/ - 新建文章"
+    ],
+    "features_completed": [
+      "Next.js 14 + TypeScript 项目架构",
+      "Arco Design UI 组件库集成",
+      "Prisma + SQLite 数据库",
+      "Markdown 编辑器 (MDEditor)",
+      "响应式布局",
+      "分屏预览功能"
+    ],
+    "build_time": "2026-03-10 13:25"
+  },
+  "tech_stack": {
+    "framework": "Next.js 14 + TypeScript",
+    "ui_library": "@arco-design/web-react@2.60",
+    "icons": "lucide-react",
+    "database": "Prisma + SQLite",
+    "editor": "@uiw/react-md-editor",
+    "deployment": "静态导出 (dist/)"
+  },
+  "next_steps": [
+    {
+      "priority": "P0",
+      "task": "连接数据 - 实现文章 CRUD API",
+      "status": "todo"
+    },
+    {
+      "priority": "P1", 
+      "task": "智能粘贴 - 富文本转 Markdown",
+      "status": "todo"
+    },
+    {
+      "priority": "P1",
+      "task": "截图粘贴 - Ctrl+V 图片插入",
+      "status": "todo"
+    },
+    {
+      "priority": "P2",
+      "task": "多设备预览 - 手机/平板/桌面",
+      "status": "todo"
+    }
+  ]
+}

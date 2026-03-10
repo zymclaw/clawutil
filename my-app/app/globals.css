@@ -1,0 +1,192 @@
+@import '@arco-design/web-react/dist/css/arco.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Arco Design 主色 */
+  --arcoblue-6: #165DFF;
+  --arcoblue-5: #4080FF;
+  --arcoblue-7: #0E42D2;
+  
+  /* 成功绿 */
+  --success-6: #00B42A;
+  /* 警告橙 */
+  --warning-6: #FF7D00;
+  /* 错误红 */
+  --danger-6: #F53F3F;
+  
+  /* 中性色 */
+  --gray-1: #F7F8FA;
+  --gray-2: #F2F3F5;
+  --gray-3: #E5E6EB;
+  --gray-4: #C9CDD4;
+  --gray-5: #A9AEB8;
+  --gray-6: #86909C;
+  --gray-7: #6B7785;
+  --gray-8: #4E5969;
+  --gray-9: #272E3B;
+  --gray-10: #1D2129;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-5);
+}
+
+/* 隐藏滚动条 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Arco 组件样式覆盖 */
+.arco-card {
+  border-radius: 8px !important;
+}
+
+.arco-btn {
+  border-radius: 4px !important;
+}
+
+.arco-input,
+.arco-select-view,
+.arco-textarea {
+  border-radius: 4px !important;
+}
+
+/* Markdown 内容样式 */
+.markdown-body {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--gray-10);
+}
+
+.markdown-body h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 32px 0 16px;
+  color: var(--gray-10);
+}
+
+.markdown-body h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 24px 0 12px;
+  color: var(--gray-9);
+}
+
+.markdown-body h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 20px 0 10px;
+  color: var(--gray-9);
+}
+
+.markdown-body p {
+  margin: 12px 0;
+}
+
+.markdown-body code {
+  background: var(--gray-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 14px;
+}
+
+.markdown-body pre {
+  background: var(--gray-9);
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0;
+}
+
+.markdown-body pre code {
+  background: transparent;
+  padding: 0;
+  color: var(--gray-1);
+}
+
+.markdown-body blockquote {
+  border-left: 4px solid var(--arcoblue-6);
+  padding-left: 16px;
+  margin: 16px 0;
+  color: var(--gray-6);
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  margin: 12px 0;
+  padding-left: 24px;
+}
+
+.markdown-body li {
+  margin: 6px 0;
+}
+
+.markdown-body a {
+  color: var(--arcoblue-6);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+}
+
+.markdown-body th,
+.markdown-body td {
+  border: 1px solid var(--gray-3);
+  padding: 12px;
+  text-align: left;
+}
+
+.markdown-body th {
+  background: var(--gray-1);
+  font-weight: 600;
+}

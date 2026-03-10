@@ -1,0 +1,42 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seed": "ts-node scripts/seed.ts",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate"
+  },
+  "dependencies": {
+    "@arco-design/theme-line": "^0.0.3",
+    "@arco-design/web-react": "2.60",
+    "@prisma/client": "^5.22.0",
+    "@types/turndown": "^5.0.6",
+    "@uiw/react-md-editor": "^4.0.11",
+    "dayjs": "^1.11.19",
+    "framer-motion": "^12.35.2",
+    "lucide-react": "^0.577.0",
+    "next": "14.2.35",
+    "prisma": "^5.22.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hot-toast": "^2.6.0",
+    "turndown": "^7.2.2",
+    "zustand": "^5.0.11"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.35",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

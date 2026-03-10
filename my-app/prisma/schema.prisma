@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 文章表
+model Article {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  summary     String?
+  content     String
+  htmlContent String?
+  
+  // 使用 String 替代 enum (SQLite 不支持 enum)
+  type        String   @default("DAILY") // DAILY, WIKI, COMPARE, WORKFLOW, WEEKLY
+  status      String   @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  
+  publishDate DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  viewCount   Int      @default(0)
+  readTime    Int?
+  
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  tags        Tag[]
+  
+  coverImage  String?
+  metaDesc    String?
+  
+  @@index([publishDate])
+  @@index([status])
+  @@index([type])
+}
+
+// 分类表
+model Category {
+  id          String    @id @default(uuid())
+  slug        String    @unique
+  name        String
+  description String?
+  icon        String?
+  color       String?
+  sortOrder   Int       @default(0)
+  
+  articles    Article[]
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// 标签表
+model Tag {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  color     String?
+  articles  Article[]
+  
+  createdAt DateTime  @default(now())
+}
+
+// 里程碑表
+model Milestone {
+  id          String   @id @default(uuid())
+  year        Int
+  month       Int?
+  day         Int?
+  title       String
+  description String
+  category    String   @default("TECH") // TECH, PRODUCT, CULTURE, RESEARCH
+  importance  Int      @default(1)
+  link        String?
+  
+  createdAt   DateTime @default(now())
+}
