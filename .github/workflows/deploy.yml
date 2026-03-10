@@ -28,6 +28,15 @@ jobs:
           cache: npm
           cache-dependency-path: my-app/package-lock.json
 
+      - name: Sync Articles to Next.js
+        run: |
+          echo "Syncing /articles to my-app/public/articles..."
+          # Remove old copy and sync fresh
+          rm -rf my-app/public/articles
+          cp -r articles my-app/public/articles
+          echo "Articles synced successfully!"
+          ls -la my-app/public/articles/
+
       - name: Install Dependencies
         run: cd my-app && npm ci
 
