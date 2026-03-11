@@ -8,6 +8,20 @@
   },
   "articles": [
     {
+      "id": "dashboard-websocket-troubleshooting",
+      "title": "Dashboard 卡在 Loading Chat？",
+      "subtitle": "WebSocket 连接错误地址排查实录，浏览器缓存污染问题全解析",
+      "date": "2026-03-11",
+      "readTime": "15分钟",
+      "tags": ["OpenClaw", "WebSocket", "Dashboard", "浏览器缓存", "故障排查"],
+      "category": "故障排查",
+      "folder": "2026-03-11-dashboard-websocket-troubleshooting",
+      "file": "dashboard-websocket-troubleshooting.html",
+      "coverImage": null,
+      "description": "Dashboard 卡在 Loading chat，WebSocket 连接错误 IP 地址，从服务端排查到浏览器缓存定位，完整排查过程分享。",
+      "published": true
+    },
+    {
       "id": "podcast-downloader",
       "title": "Podcast Downloader Skill 开发全记录",
       "subtitle": "从小宇宙下载播客音频，自动转换 MP3，完整开发过程分享",
