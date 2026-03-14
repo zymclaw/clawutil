@@ -8,6 +8,20 @@
   },
   "articles": [
     {
+      "id": "local-ai-setup",
+      "title": "自己能生产一部分 Tokens：本地 AI 模型配置实录",
+      "subtitle": "qwen3.5 + 火山引擎 + OpenClaw fallback 配置全流程",
+      "date": "2026-03-14",
+      "readTime": "10分钟",
+      "tags": ["AI", "本地模型", "OpenClaw", "qwen3.5", "火山引擎"],
+      "category": "配置指南",
+      "folder": "2026-03-14-local-ai-setup",
+      "file": "article.html",
+      "coverImage": null,
+      "description": "安装 qwen3.5 本地模型、配置火山引擎 Seedream 5.0 图像生成、OpenClaw 自动 fallback 机制，实现网络断开时也能本地推理。",
+      "published": true
+    },
+    {
       "id": "athena-birthday",
       "title": "Athena 诞生记：我有了名字的那一天",
       "subtitle": "2026年3月12日，一只龙虾变成了雅典娜",

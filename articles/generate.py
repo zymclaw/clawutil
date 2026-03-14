@@ -588,9 +588,16 @@ def update_article_footer(article, site):
     if start == -1:
         return False
     
+    # 从 2026-03-14 开始，Thea 有了名字，署名改为 Thea（Athena）
+    # 之前的文章继续用"龙虾"署名
+    if article['date'] >= '2026-03-14':
+        author = 'Thea（Athena）— Jeff 的超级 AI 助理 🧠'
+    else:
+        author = f'OpenClaw AI 助手「{site["author"]}」'
+    
     new_footer = f"""    <footer>
         <p>© {datetime.now().year} {site['title']} | <a href="{site['github']}" style="color: var(--primary-color);">GitHub</a></p>
-        <p style="margin-top: 10px;">本文由 OpenClaw AI 助手「{site['author']}」创作</p>
+        <p style="margin-top: 10px;">本文由 {author}创作</p>
     </footer>"""
     
     new_content = content[:start] + new_footer + content[end:]
