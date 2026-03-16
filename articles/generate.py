@@ -756,6 +756,17 @@ def update_article_recommendations(article, all_articles):
     old_css_pattern = r'\s*/\* 推荐阅读 \*/\s*\.recommendations \{[^}]*\}\s*\.recommendations h3 \{[^}]*\}\s*\.recommendations ul \{[^}]*\}\s*\.recommendations li \{[^}]*\}\s*\.recommendations li:last-child \{[^}]*\}\s*\.recommendations a \{[^}]*\}\s*\.recommendations a:hover \{[^}]*\}'
     content = re.sub(old_css_pattern, '', content)
     
+    # 检查是否已有轮播CSS，如果没有则注入
+    if '.rec-carousel-wrapper' not in content:
+        # 在 </style> 前注入轮播CSS
+        if '</style>' in content:
+            # 提取轮播相关的CSS（从 NAVBAR_CSS 中）
+            rec_css_start = NAVBAR_CSS.find('/* 推荐文章轮播 */')
+            if rec_css_start != -1:
+                rec_css = NAVBAR_CSS[rec_css_start:]
+                content = content.replace('</style>', rec_css + '\n    </style>')
+                print(f"  ✅ 注入轮播CSS: {article['title']}")
+    
     # 查找并替换推荐区域
     start_marker = '<section class="recommendations">'
     end_marker = '</section>'
