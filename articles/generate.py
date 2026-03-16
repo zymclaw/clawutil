@@ -456,35 +456,36 @@ NAVBAR_CSS = '''
         
         @media (max-width: 768px) {
             .rec-carousel-wrapper {
-                flex-direction: column;
+                flex-direction: column !important;
             }
             
             .rec-nav {
-                display: none;
+                display: none !important;
             }
             
             .rec-carousel {
-                overflow: visible;
+                overflow: visible !important;
             }
             
             .rec-track {
-                flex-direction: column;
+                display: flex !important;
+                flex-direction: column !important;
                 transform: none !important;
             }
             
             .rec-card {
-                flex: 0 0 auto;
-                margin-right: 0;
-                margin-bottom: 12px;
-                width: 100%;
+                flex: none !important;
+                width: 100% !important;
+                margin-right: 0 !important;
+                margin-bottom: 12px !important;
             }
             
             .rec-card:last-child {
-                margin-bottom: 0;
+                margin-bottom: 0 !important;
             }
             
             .rec-counter {
-                display: none;
+                display: none !important;
             }
         }
 '''
@@ -776,30 +777,22 @@ def update_article_recommendations(article, all_articles):
     old_css_pattern = r'\s*/\* 推荐阅读 \*/\s*\.recommendations \{[^}]*\}\s*\.recommendations h3 \{[^}]*\}\s*\.recommendations ul \{[^}]*\}\s*\.recommendations li \{[^}]*\}\s*\.recommendations li:last-child \{[^}]*\}\s*\.recommendations a \{[^}]*\}\s*\.recommendations a:hover \{[^}]*\}'
     content = re.sub(old_css_pattern, '', content)
     
-    # 删除所有旧的轮播相关CSS（包括孤立的@media）
-    # 1. 删除 /* 推荐文章轮播 */ 到下一个主要CSS块之间的所有内容
-    old_carousel_pattern = r'\s*/\* 推荐文章轮播 \*/[^/]*(?=/\* 页脚 \*/|footer \{)'
-    content = re.sub(old_carousel_pattern, '', content)
+    # 删除所有轮播相关CSS（包括 /* 推荐文章轮播 */ 和 @media）
+    # 1. 删除从 /* 推荐文章轮播 */ 到 </style> 之前的所有内容
+    rec_css_pattern = r'\s*/\* 推荐文章轮播 \*/.*?(?=</style>)'
+    content = re.sub(rec_css_pattern, '\n    </style>', content, flags=re.DOTALL)
     
-    # 2. 删除孤立的旧版@media（紧接在.timeline-content之后，包含.rec-card的）
-    orphan_media_pattern = r'\}@media \(max-width: 768px\) \{[^}]*\.rec-card[^}]*\}[^}]*\}'
-    content = re.sub(orphan_media_pattern, '}', content)
+    # 2. 删除孤立的旧版@media块
+    orphan_media = r'\}\s*@media \(max-width: 768px\) \{[^}]*\.rec-[^}]*\}[^}]*\}'
+    content = re.sub(orphan_media, '}', content)
     
-    # 3. 删除所有.rec-*相关的CSS块（如果存在旧的）
-    rec_css_pattern = r'\s*\.rec-[a-z-]+\s*\{[^}]*\}'
-    # 只删除不在"推荐文章轮播"注释之后的（即旧的孤立的）
-    # 策略：先检查是否有新的完整CSS块
-    
-    # 检查是否已有最新的轮播CSS（包含 .no-articles 类）
-    if '.no-articles' not in content:
-        # 在 </style> 前注入轮播CSS
-        if '</style>' in content:
-            # 提取轮播相关的CSS（从 NAVBAR_CSS 中）
-            rec_css_start = NAVBAR_CSS.find('/* 推荐文章轮播 */')
-            if rec_css_start != -1:
-                rec_css = NAVBAR_CSS[rec_css_start:]
-                content = content.replace('</style>', rec_css + '\n    </style>')
-                print(f"  ✅ 注入轮播CSS: {article['title']}")
+    # 注入新的轮播CSS
+    if '</style>' in content:
+        rec_css_start = NAVBAR_CSS.find('/* 推荐文章轮播 */')
+        if rec_css_start != -1:
+            rec_css = NAVBAR_CSS[rec_css_start:]
+            # 确保 </style> 前有正确的结尾
+            content = content.replace('</style>', rec_css.rstrip() + '\n    </style>')
     
     # 查找并替换推荐区域
     start_marker = '<section class="recommendations">'

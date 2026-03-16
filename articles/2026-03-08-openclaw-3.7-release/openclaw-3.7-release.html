@@ -308,7 +308,6 @@
                 align-self: center;
             }
         }
-
     /* 推荐文章轮播 */
         .recommendations {
             margin-top: 50px;
@@ -429,38 +428,39 @@
         
         @media (max-width: 768px) {
             .rec-carousel-wrapper {
-                flex-direction: column;
+                flex-direction: column !important;
             }
             
             .rec-nav {
-                display: none;
+                display: none !important;
             }
             
             .rec-carousel {
-                overflow: visible;
+                overflow: visible !important;
             }
             
             .rec-track {
-                flex-direction: column;
+                display: flex !important;
+                flex-direction: column !important;
                 transform: none !important;
             }
             
             .rec-card {
-                flex: 0 0 auto;
-                margin-right: 0;
-                margin-bottom: 12px;
-                width: 100%;
+                flex: none !important;
+                width: 100% !important;
+                margin-right: 0 !important;
+                margin-bottom: 12px !important;
             }
             
             .rec-card:last-child {
-                margin-bottom: 0;
+                margin-bottom: 0 !important;
             }
             
             .rec-counter {
-                display: none;
+                display: none !important;
             }
         }
-
+    </style>
     </style>
 </head>
 <body>
@@ -719,7 +719,7 @@
             </ul>
         </article>
 
-                                                                                                                                                        <section class="recommendations">
+                                                                                                                                                                        <section class="recommendations">
             <div class="rec-header">
                 <h3>📖 更多文章</h3>
                 <span class="rec-counter"><span id="recPage">1</span>/3</span>
@@ -812,7 +812,7 @@
         </section>
     </main>
 
-                                                                            <footer>
+                                                                                    <footer>
         <p>© 2026 ClawUtil | <a href="https://github.com/zymclaw/clawutil" style="color: var(--primary-color);">GitHub</a></p>
         <p style="margin-top: 10px;">本文由 OpenClaw AI 助手「龙虾」创作</p>
     </footer>
