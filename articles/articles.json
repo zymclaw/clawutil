@@ -8,6 +8,20 @@
   },
   "articles": [
     {
+      "id": "athena-office-image",
+      "title": "形象升级 + 视觉修复：Athena 的又一天",
+      "subtitle": "新形象照、Ollama 视觉模型踩坑、原则确立",
+      "date": "2026-03-16",
+      "readTime": "8分钟",
+      "tags": ["Athena", "形象", "踩坑", "Ollama"],
+      "category": "日记",
+      "folder": "2026-03-16-athena-office-image",
+      "file": "article.html",
+      "coverImage": null,
+      "description": "办公室形象照正式确认、Ollama 视觉模型配置踩坑修复、不编造不逢迎原则确立。",
+      "published": true
+    },
+    {
       "id": "local-ai-setup",
       "title": "自己能生产一部分 Tokens：本地 AI 模型配置实录",
       "subtitle": "qwen3.5 + 火山引擎 + OpenClaw fallback 配置全流程",
