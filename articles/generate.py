@@ -522,17 +522,27 @@ def generate_index_html(data):
     
     return html
 
-def generate_recommendations(current_id, articles):
-    """生成推荐文章列表（用于文章内页）"""
+def generate_recommendations(current_id, articles, max_count=3):
+    """生成推荐文章列表（用于文章内页）
+    
+    Args:
+        current_id: 当前文章ID（不显示）
+        articles: 所有文章列表
+        max_count: 最多显示多少篇推荐文章（默认3篇）
+    """
     html = """        <section class="recommendations">
             <h3>📖 更多文章</h3>
             <ul>
 """
+    count = 0
     for article in articles:
         if article['id'] != current_id and article.get('published', True):
+            if count >= max_count:
+                break
             html += f'                <li><a href="../{article["folder"]}/{article["file"]}">{article["title"]}</a></li>\n'
+            count += 1
     
-    if html.count('<li>') == 1:  # 只有标题
+    if count == 0:  # 没有推荐文章
         html += '                <li>暂无更多文章</li>\n'
     
     html += """            </ul>
