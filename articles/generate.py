@@ -335,6 +335,139 @@ NAVBAR_CSS = '''
             border-color: var(--primary-color);
             transform: translateX(-3px);
         }
+
+        /* 推荐文章轮播 */
+        .recommendations {
+            margin-top: 50px;
+            padding: 25px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .rec-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .rec-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        
+        .rec-counter {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .rec-carousel-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .rec-carousel {
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .rec-track {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+        
+        .rec-card {
+            flex: 0 0 calc(33.333% - 12px);
+            margin-right: 18px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+        
+        .rec-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+        
+        .rec-card-link {
+            display: block;
+            padding: 16px;
+            text-decoration: none;
+        }
+        
+        .rec-card-title {
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .rec-card-desc {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .rec-card-date {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+        
+        .rec-nav {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+        
+        .rec-nav:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .no-articles {
+            color: var(--text-muted);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .rec-card {
+                flex: 0 0 100%;
+                margin-right: 0;
+            }
+            
+            .rec-carousel-wrapper {
+                flex-direction: column;
+            }
+            
+            .rec-nav {
+                align-self: center;
+            }
+        }
 '''
 
 NAVBAR_HTML = '''    <nav class="nav-bar">
@@ -522,31 +655,90 @@ def generate_index_html(data):
     
     return html
 
-def generate_recommendations(current_id, articles, max_count=3):
-    """生成推荐文章列表（用于文章内页）
+def generate_recommendations(current_id, articles, per_page=3):
+    """生成推荐文章列表（卡片轮播形式）
     
     Args:
         current_id: 当前文章ID（不显示）
         articles: 所有文章列表
-        max_count: 最多显示多少篇推荐文章（默认3篇）
+        per_page: 每页显示多少篇（默认3篇）
     """
-    html = """        <section class="recommendations">
+    # 过滤出已发布的文章（排除当前文章）
+    published = [a for a in articles if a['id'] != current_id and a.get('published', True)]
+    
+    if not published:
+        return """        <section class="recommendations">
             <h3>📖 更多文章</h3>
-            <ul>
-"""
-    count = 0
-    for article in articles:
-        if article['id'] != current_id and article.get('published', True):
-            if count >= max_count:
-                break
-            html += f'                <li><a href="../{article["folder"]}/{article["file"]}">{article["title"]}</a></li>\n'
-            count += 1
-    
-    if count == 0:  # 没有推荐文章
-        html += '                <li>暂无更多文章</li>\n'
-    
-    html += """            </ul>
+            <p class="no-articles">暂无更多文章</p>
         </section>"""
+    
+    # 生成卡片 HTML
+    cards_html = ""
+    for article in published:
+        title = article.get('title', '未命名')
+        desc = article.get('description', '') or article.get('subtitle', '')
+        if len(desc) > 60:
+            desc = desc[:60] + '...'
+        date = article.get('date', '')
+        folder = article.get('folder', '')
+        file = article.get('file', 'article.html')
+        
+        cards_html += f'''
+                <div class="rec-card">
+                    <a href="../{folder}/{file}" class="rec-card-link">
+                        <div class="rec-card-title">{title}</div>
+                        <div class="rec-card-desc">{desc}</div>
+                        <div class="rec-card-date">{date}</div>
+                    </a>
+                </div>'''
+    
+    # 是否需要分页
+    total = len(published)
+    need_pagination = total > per_page
+    
+    html = f'''        <section class="recommendations">
+            <div class="rec-header">
+                <h3>📖 更多文章</h3>
+                {f'<span class="rec-counter"><span id="recPage">1</span>/{(total + per_page - 1) // per_page}</span>' if need_pagination else ''}
+            </div>
+            <div class="rec-carousel-wrapper">
+                <button class="rec-nav rec-prev" onclick="recNavigate(-1)"{' style="visibility:hidden"' if not need_pagination else ''}>❮</button>
+                <div class="rec-carousel">
+                    <div class="rec-track" id="recTrack">
+{cards_html}
+                    </div>
+                </div>
+                <button class="rec-nav rec-next" onclick="recNavigate(1)"{' style="visibility:hidden"' if not need_pagination else ''}>❯</button>
+            </div>
+            <script>
+            (function() {{
+                let page = 0;
+                const perPage = {per_page};
+                const total = {total};
+                const pages = Math.ceil(total / perPage);
+                const track = document.getElementById('recTrack');
+                const pageEl = document.getElementById('recPage');
+                const prevBtn = document.querySelector('.rec-prev');
+                const nextBtn = document.querySelector('.rec-next');
+                
+                function updateCarousel() {{
+                    const offset = -page * 100;
+                    track.style.transform = 'translateX(' + offset + '%)';
+                    if (pageEl) pageEl.textContent = page + 1;
+                    if (prevBtn) prevBtn.style.visibility = page === 0 ? 'hidden' : 'visible';
+                    if (nextBtn) nextBtn.style.visibility = page >= pages - 1 ? 'hidden' : 'visible';
+                }}
+                
+                window.recNavigate = function(dir) {{
+                    page = Math.max(0, Math.min(pages - 1, page + dir));
+                    updateCarousel();
+                }};
+                
+                updateCarousel();
+            }})();
+            </script>
+        </section>'''
+    
     return html
 
 def update_article_recommendations(article, all_articles):
@@ -558,6 +750,11 @@ def update_article_recommendations(article, all_articles):
     
     with open(article_path, 'r', encoding='utf-8') as f:
         content = f.read()
+    
+    # 删除旧的 .recommendations 样式（如果存在）
+    import re
+    old_css_pattern = r'\s*/\* 推荐阅读 \*/\s*\.recommendations \{[^}]*\}\s*\.recommendations h3 \{[^}]*\}\s*\.recommendations ul \{[^}]*\}\s*\.recommendations li \{[^}]*\}\s*\.recommendations li:last-child \{[^}]*\}\s*\.recommendations a \{[^}]*\}\s*\.recommendations a:hover \{[^}]*\}'
+    content = re.sub(old_css_pattern, '', content)
     
     # 查找并替换推荐区域
     start_marker = '<section class="recommendations">'
