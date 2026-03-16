@@ -169,6 +169,11 @@
             border-color: var(--primary-color);
             transform: translateX(-3px);
         }
+            
+            .rec-nav {
+                align-self: center;
+            }
+        }
 
     /* 推荐文章轮播 */
         .recommendations {
@@ -289,17 +294,36 @@
         }
         
         @media (max-width: 768px) {
-            .rec-card {
-                flex: 0 0 100%;
-                margin-right: 0;
-            }
-            
             .rec-carousel-wrapper {
                 flex-direction: column;
             }
             
             .rec-nav {
-                align-self: center;
+                display: none;
+            }
+            
+            .rec-carousel {
+                overflow: visible;
+            }
+            
+            .rec-track {
+                flex-direction: column;
+                transform: none !important;
+            }
+            
+            .rec-card {
+                flex: 0 0 auto;
+                margin-right: 0;
+                margin-bottom: 12px;
+                width: 100%;
+            }
+            
+            .rec-card:last-child {
+                margin-bottom: 0;
+            }
+            
+            .rec-counter {
+                display: none;
             }
         }
 
@@ -611,7 +635,7 @@ fi</code></pre>
             </ul>
 
             <!-- recommendations -->
-                                                                                                            <section class="recommendations">
+                                                                                                                                    <section class="recommendations">
             <div class="rec-header">
                 <h3>📖 更多文章</h3>
                 <span class="rec-counter"><span id="recPage">1</span>/3</span>

@@ -455,17 +455,36 @@ NAVBAR_CSS = '''
         }
         
         @media (max-width: 768px) {
-            .rec-card {
-                flex: 0 0 100%;
-                margin-right: 0;
-            }
-            
             .rec-carousel-wrapper {
                 flex-direction: column;
             }
             
             .rec-nav {
-                align-self: center;
+                display: none;
+            }
+            
+            .rec-carousel {
+                overflow: visible;
+            }
+            
+            .rec-track {
+                flex-direction: column;
+                transform: none !important;
+            }
+            
+            .rec-card {
+                flex: 0 0 auto;
+                margin-right: 0;
+                margin-bottom: 12px;
+                width: 100%;
+            }
+            
+            .rec-card:last-child {
+                margin-bottom: 0;
+            }
+            
+            .rec-counter {
+                display: none;
             }
         }
 '''
@@ -751,13 +770,28 @@ def update_article_recommendations(article, all_articles):
     with open(article_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # 删除旧的 .recommendations 样式（如果存在）
     import re
+    
+    # 删除旧的 .recommendations 样式（如果存在）
     old_css_pattern = r'\s*/\* 推荐阅读 \*/\s*\.recommendations \{[^}]*\}\s*\.recommendations h3 \{[^}]*\}\s*\.recommendations ul \{[^}]*\}\s*\.recommendations li \{[^}]*\}\s*\.recommendations li:last-child \{[^}]*\}\s*\.recommendations a \{[^}]*\}\s*\.recommendations a:hover \{[^}]*\}'
     content = re.sub(old_css_pattern, '', content)
     
-    # 检查是否已有轮播CSS，如果没有则注入
-    if '.rec-carousel-wrapper' not in content:
+    # 删除所有旧的轮播相关CSS（包括孤立的@media）
+    # 1. 删除 /* 推荐文章轮播 */ 到下一个主要CSS块之间的所有内容
+    old_carousel_pattern = r'\s*/\* 推荐文章轮播 \*/[^/]*(?=/\* 页脚 \*/|footer \{)'
+    content = re.sub(old_carousel_pattern, '', content)
+    
+    # 2. 删除孤立的旧版@media（紧接在.timeline-content之后，包含.rec-card的）
+    orphan_media_pattern = r'\}@media \(max-width: 768px\) \{[^}]*\.rec-card[^}]*\}[^}]*\}'
+    content = re.sub(orphan_media_pattern, '}', content)
+    
+    # 3. 删除所有.rec-*相关的CSS块（如果存在旧的）
+    rec_css_pattern = r'\s*\.rec-[a-z-]+\s*\{[^}]*\}'
+    # 只删除不在"推荐文章轮播"注释之后的（即旧的孤立的）
+    # 策略：先检查是否有新的完整CSS块
+    
+    # 检查是否已有最新的轮播CSS（包含 .no-articles 类）
+    if '.no-articles' not in content:
         # 在 </style> 前注入轮播CSS
         if '</style>' in content:
             # 提取轮播相关的CSS（从 NAVBAR_CSS 中）
