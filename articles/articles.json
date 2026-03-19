@@ -8,17 +8,17 @@
   },
   "articles": [
     {
-      "id": "openclaw-story-cards",
-      "title": "OpenClaw 实战故事卡片",
-      "subtitle": "15个真实使用场景 · 可复现经验 · OPC 创业利器",
-      "date": "2026-03-17",
-      "readTime": "互动展示",
-      "tags": ["OpenClaw", "实战案例", "故事卡片", "Athena"],
-      "category": "实战案例",
-      "folder": "2026-03-17-openclaw-story-cards",
-      "file": "story-cards.html",
+      "id": "stock-skill-and-dual-lobster",
+      "title": "从数据踩坑到双虾命名：Athena 的成长日",
+      "subtitle": "一只龙虾如何学会严谨，又如何迎来新战友",
+      "date": "2026-03-19",
+      "readTime": "8分钟",
+      "tags": ["Athena", "踩坑", "双虾命名", "股票分析", "播客"],
+      "category": "日记",
+      "folder": "2026-03-19-stock-skill-and-dual-lobster",
+      "file": "article.html",
       "coverImage": null,
-      "description": "从故障排查到内容创业，从技能开发到自我进化。15个真实故事，展现 AI 助手如何成为创业伙伴。包含 Athena 形象诞生故事。",
+      "description": "股票数据踩坑、stock-quote Skill 创建、双虾命名确立、张家军军团架构规划、AI Agent 科技股分析、播客下载。",
       "published": true
     },
     {
