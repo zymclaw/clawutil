@@ -773,26 +773,42 @@ def update_article_recommendations(article, all_articles):
     
     import re
     
-    # 删除旧的 .recommendations 样式（如果存在）
-    old_css_pattern = r'\s*/\* 推荐阅读 \*/\s*\.recommendations \{[^}]*\}\s*\.recommendations h3 \{[^}]*\}\s*\.recommendations ul \{[^}]*\}\s*\.recommendations li \{[^}]*\}\s*\.recommendations li:last-child \{[^}]*\}\s*\.recommendations a \{[^}]*\}\s*\.recommendations a:hover \{[^}]*\}'
-    content = re.sub(old_css_pattern, '', content)
+    # 删除旧的推荐文章轮播 CSS
+    # 策略：删除从 "/* 推荐文章轮播 */" 到 "</style>" 之间的所有内容（包括这两个标记）
+    # 然后在删除位置插入新的 CSS 和 </style>
     
-    # 删除所有轮播相关CSS（包括 /* 推荐文章轮播 */ 和 @media）
-    # 1. 删除从 /* 推荐文章轮播 */ 到 </style> 之前的所有内容
-    rec_css_pattern = r'\s*/\* 推荐文章轮播 \*/.*?(?=</style>)'
-    content = re.sub(rec_css_pattern, '\n    </style>', content, flags=re.DOTALL)
+    import re
     
-    # 2. 删除孤立的旧版@media块
-    orphan_media = r'\}\s*@media \(max-width: 768px\) \{[^}]*\.rec-[^}]*\}[^}]*\}'
-    content = re.sub(orphan_media, '}', content)
+    # 1. 找到 </style> 的位置
+    style_end_pos = content.find('</style>')
+    if style_end_pos == -1:
+        print(f"⚠️  未找到 </style> 标签: {article_path}")
+        return False
     
-    # 注入新的轮播CSS
-    if '</style>' in content:
-        rec_css_start = NAVBAR_CSS.find('/* 推荐文章轮播 */')
-        if rec_css_start != -1:
-            rec_css = NAVBAR_CSS[rec_css_start:]
-            # 确保 </style> 前有正确的结尾
-            content = content.replace('</style>', rec_css.rstrip() + '\n    </style>')
+    # 2. 从 </style> 向前查找 "/* 推荐文章轮播 */"
+    rec_comment = '/* 推荐文章轮播 */'
+    rec_start = content.rfind(rec_comment, 0, style_end_pos)
+    
+    # 3. 如果找到了，删除从注释到 </style> 的所有内容
+    if rec_start != -1:
+        # 找到注释前的缩进位置
+        before_rec = content[:rec_start]
+        # 找到 </style> 后的位置
+        after_style = content[style_end_pos + len('</style>'):]
+        
+        # 保留 </style> 之前的内容，删除轮播 CSS
+        content = before_rec.rstrip() + '\n    </style>' + after_style
+        style_end_pos = before_rec.rstrip().rfind('</style>')
+        if style_end_pos == -1:
+            # 需要重新找 </style>
+            style_end_pos = content.find('</style>')
+    
+    # 4. 注入新的轮播 CSS（在 </style> 前）
+    rec_css_start = NAVBAR_CSS.find('/* 推荐文章轮播 */')
+    if rec_css_start != -1:
+        rec_css = NAVBAR_CSS[rec_css_start:].rstrip()
+        # 在 </style> 前注入 CSS
+        content = content.replace('</style>', rec_css + '\n    </style>', 1)  # 只替换第一个
     
     # 查找并替换推荐区域
     start_marker = '<section class="recommendations">'

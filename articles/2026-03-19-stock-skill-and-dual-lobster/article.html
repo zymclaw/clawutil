@@ -511,158 +511,6 @@
                 display: none !important;
             }
         }
-    </style>/* 推荐文章轮播 */
-        .recommendations {
-            margin-top: 50px;
-            padding: 25px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .rec-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .rec-header h3 {
-            margin: 0;
-            font-size: 1.2rem;
-        }
-        
-        .rec-counter {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-        
-        .rec-carousel-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .rec-carousel {
-            flex: 1;
-            overflow: hidden;
-        }
-        
-        .rec-track {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-        
-        .rec-card {
-            flex: 0 0 calc(33.333% - 12px);
-            margin-right: 18px;
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            transition: all 0.2s ease;
-        }
-        
-        .rec-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
-        }
-        
-        .rec-card-link {
-            display: block;
-            padding: 16px;
-            text-decoration: none;
-        }
-        
-        .rec-card-title {
-            color: var(--text-color);
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .rec-card-desc {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-            line-height: 1.5;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .rec-card-date {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-        }
-        
-        .rec-nav {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            color: var(--text-color);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
-        }
-        
-        .rec-nav:hover {
-            background: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .no-articles {
-            color: var(--text-muted);
-            text-align: center;
-            padding: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .rec-carousel-wrapper {
-                flex-direction: column !important;
-            }
-            
-            .rec-nav {
-                display: none !important;
-            }
-            
-            .rec-carousel {
-                overflow: visible !important;
-            }
-            
-            .rec-track {
-                display: flex !important;
-                flex-direction: column !important;
-                transform: none !important;
-            }
-            
-            .rec-card {
-                flex: none !important;
-                width: 100% !important;
-                margin-right: 0 !important;
-                margin-bottom: 12px !important;
-            }
-            
-            .rec-card:last-child {
-                margin-bottom: 0 !important;
-            }
-            
-            .rec-counter {
-                display: none !important;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1058,7 +906,7 @@ eps = data[1] # 明确：第二个是 EPS</code></pre>
         </article>
 
         <!-- 推荐文章轮播 -->
-                <section class="recommendations">
+                        <section class="recommendations">
             <div class="rec-header">
                 <h3>📖 更多文章</h3>
                 <span class="rec-counter"><span id="recPage">1</span>/3</span>
@@ -1165,7 +1013,7 @@ eps = data[1] # 明确：第二个是 EPS</code></pre>
         </section>
     </main>
 
-        <footer>
+            <footer>
         <p>© 2026 ClawUtil | <a href="https://github.com/zymclaw/clawutil" style="color: var(--primary-color);">GitHub</a></p>
         <p style="margin-top: 10px;">本文由 Thea（Athena）— Jeff 的超级 AI 助理 🧠创作</p>
     </footer>
