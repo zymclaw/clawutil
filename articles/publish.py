@@ -4,15 +4,18 @@ ClawUtil 文章发布工具
 
 用法：
   python3 publish.py new <title>           # 创建新文章
+  python3 publish.py edit <id>             # 编辑文章（打开 HTML）
   python3 publish.py preview <id>          # 本地预览
   python3 publish.py check                 # 检查所有文章
   python3 publish.py generate              # 运行 generate.py
   python3 publish.py status                # 查看状态
+  python3 publish.py workflow              # 完整工作流（检查+生成+预览）
+  python3 publish.py publish <id>          # 发布（git add/commit/push）
 
 示例：
   python3 publish.py new "OpenClaw 新功能体验"
-  python3 publish.py preview stock-skill-and-dual-lobster
-  python3 publish.py check
+  python3 publish.py workflow
+  python3 publish.py publish stock-skill-and-dual-lobster
 """
 
 import json
@@ -26,6 +29,7 @@ from pathlib import Path
 ARTICLES_DIR = Path(__file__).parent
 DATA_FILE = ARTICLES_DIR / "articles.json"
 TEMPLATE_DIR = ARTICLES_DIR.parent / "_templates" / "article-template.html"
+REPO_DIR = ARTICLES_DIR.parent
 
 def load_data():
     """加载文章数据"""
@@ -242,6 +246,107 @@ def cmd_status():
         pub = "🟢" if article.get('published') else "🟡"
         print(f"  {pub} {article['date']} - {article['title'][:40]}")
 
+def cmd_edit(article_id):
+    """编辑文章"""
+    data = load_data()
+    
+    for article in data['articles']:
+        if article['id'] == article_id:
+            folder = article['folder']
+            file = article['file']
+            article_path = ARTICLES_DIR / folder / file
+            json_path = DATA_FILE
+            
+            print(f"📝 打开编辑:")
+            print(f"   文章: {article_path}")
+            print(f"   元数据: {json_path}")
+            
+            # 打开 HTML 文件
+            subprocess.run(['open', str(article_path)])
+            # 打开 JSON 文件
+            subprocess.run(['open', '-a', 'TextEdit', str(json_path)])
+            return True
+    
+    print(f"❌ 未找到文章: {article_id}")
+    return False
+
+def cmd_workflow():
+    """完整工作流：检查 + 生成 + 预览最新文章"""
+    print("🔄 执行完整工作流...\n")
+    
+    # 1. 检查
+    print("【1/3】检查文章格式...")
+    if not cmd_check():
+        print("\n❌ 检查未通过，请修复后再继续")
+        return False
+    
+    # 2. 生成
+    print("\n【2/3】生成首页和推荐链接...")
+    if not cmd_generate():
+        print("\n❌ 生成失败")
+        return False
+    
+    # 3. 预览最新文章
+    print("\n【3/3】打开最新文章预览...")
+    data = load_data()
+    if data['articles']:
+        latest = data['articles'][0]
+        print(f"\n📖 最新文章: {latest['title']}")
+        print(f"   ID: {latest['id']}")
+        print(f"   日期: {latest['date']}")
+        cmd_preview(latest['id'])
+    
+    print("\n" + "="*50)
+    print("✅ 工作流完成！")
+    print("\n下一步：")
+    print("1. 检查预览效果")
+    print("2. 确认无误后回复「可以发布」")
+    print("3. 执行: python3 publish.py publish <文章ID>")
+    return True
+
+def cmd_publish(article_id):
+    """发布到 GitHub"""
+    data = load_data()
+    
+    for article in data['articles']:
+        if article['id'] == article_id:
+            title = article['title']
+            folder = article['folder']
+            
+            print(f"🚀 发布文章: {title}\n")
+            
+            # 检查是否有未提交的更改
+            result = subprocess.run(['git', 'status', '--porcelain'], 
+                                    cwd=REPO_DIR, capture_output=True, text=True)
+            
+            if not result.stdout.strip():
+                print("⚠️  没有需要提交的更改")
+                return False
+            
+            # git add
+            print("📦 添加文件...")
+            subprocess.run(['git', 'add', '.'], cwd=REPO_DIR)
+            
+            # git commit
+            commit_msg = f"docs: 发布文章「{title}」"
+            print(f"📝 提交: {commit_msg}")
+            subprocess.run(['git', 'commit', '-m', commit_msg], cwd=REPO_DIR)
+            
+            # git push
+            print("🚀 推送到 GitHub...")
+            result = subprocess.run(['git', 'push'], cwd=REPO_DIR)
+            
+            if result.returncode == 0:
+                print("\n✅ 发布成功！")
+                print(f"📖 在线地址: https://zymclaw.github.io/clawutil/articles/{folder}/article.html")
+                return True
+            else:
+                print("\n❌ 推送失败")
+                return False
+    
+    print(f"❌ 未找到文章: {article_id}")
+    return False
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -255,6 +360,12 @@ def main():
             sys.exit(1)
         title = ' '.join(sys.argv[2:])
         cmd_new(title)
+    
+    elif cmd == 'edit':
+        if len(sys.argv) < 3:
+            print("用法: python3 publish.py edit <id>")
+            sys.exit(1)
+        cmd_edit(sys.argv[2])
     
     elif cmd == 'preview':
         if len(sys.argv) < 3:
@@ -270,6 +381,15 @@ def main():
     
     elif cmd == 'status':
         cmd_status()
+    
+    elif cmd == 'workflow':
+        cmd_workflow()
+    
+    elif cmd == 'publish':
+        if len(sys.argv) < 3:
+            print("用法: python3 publish.py publish <id>")
+            sys.exit(1)
+        cmd_publish(sys.argv[2])
     
     else:
         print(f"未知命令: {cmd}")
