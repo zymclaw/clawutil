@@ -8,6 +8,21 @@
   },
   "articles": [
     {
+      "id": "review-makes-slower",
+      "title": "Every layer of review makes you 10x slower",
+      "subtitle": "Avery Pennarun 的效率哲学：审查层如何拖慢你",
+      "date": "2026-03-20",
+      "readTime": "5分钟",
+      "tags": ["效率方法", "工程文化", "Avery Pennarun"],
+      "category": "洞察分享",
+      "folder": "2026-03-20-review-makes-slower",
+      "file": "review-makes-slower.html",
+      "coverImage": null,
+      "description": "审查层让你慢10倍。每一层审批、每一个签字、每一个确认，都在消耗你的速度。Avery Pennarun 用一句话揭示了效率的本质。",
+      "published": true,
+      "isKnowledgeCard": true
+    },
+    {
       "id": "stock-skill-and-dual-lobster",
       "title": "从数据踩坑到双虾命名：Athena 的成长日",
       "subtitle": "一只龙虾如何学会严谨，又如何迎来新战友",
