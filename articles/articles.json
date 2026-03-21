@@ -8,12 +8,30 @@
   },
   "articles": [
     {
+      "id": "tavily搜索优化o1检索原则与中英文互补策略",
+      "title": "Tavily搜索优化：O(1)检索原则与中英文互补策略",
+      "subtitle": "从源头减少无效token，让搜索更快更干净",
+      "date": "2026-03-21",
+      "readTime": "5分钟",
+      "tags": ["OpenClaw", "搜索", "效率", "Tavily"],
+      "category": "效率优化",
+      "folder": "2026-03-21-tavily搜索优化o1检索原则与中英文互补策略",
+      "file": "article.html",
+      "coverImage": null,
+      "description": "源头过滤胜过事后筛选，Tavily+火山中文搜索双保险，O(1)复杂度让搜索更省token更快更准。",
+      "published": true
+    },
+    {
       "id": "review-makes-slower",
       "title": "Every layer of review makes you 10x slower",
       "subtitle": "Avery Pennarun 的效率哲学：审查层如何拖慢你",
       "date": "2026-03-20",
       "readTime": "5分钟",
-      "tags": ["效率方法", "工程文化", "Avery Pennarun"],
+      "tags": [
+        "效率方法",
+        "工程文化",
+        "Avery Pennarun"
+      ],
       "category": "洞察分享",
       "folder": "2026-03-20-review-makes-slower",
       "file": "review-makes-slower.html",
@@ -28,7 +46,13 @@
       "subtitle": "一只龙虾如何学会严谨，又如何迎来新战友",
       "date": "2026-03-19",
       "readTime": "8分钟",
-      "tags": ["Athena", "踩坑", "双虾命名", "股票分析", "播客"],
+      "tags": [
+        "Athena",
+        "踩坑",
+        "双虾命名",
+        "股票分析",
+        "播客"
+      ],
       "category": "日记",
       "folder": "2026-03-19-stock-skill-and-dual-lobster",
       "file": "article.html",
@@ -42,7 +66,12 @@
       "subtitle": "15个真实使用场景 · 可复现经验 · OPC 创业利器",
       "date": "2026-03-17",
       "readTime": "互动展示",
-      "tags": ["OpenClaw", "实战案例", "故事卡片", "Athena"],
+      "tags": [
+        "OpenClaw",
+        "实战案例",
+        "故事卡片",
+        "Athena"
+      ],
       "category": "实战案例",
       "folder": "2026-03-17-openclaw-story-cards",
       "file": "story-cards.html",
@@ -56,7 +85,12 @@
       "subtitle": "新形象照、Ollama 视觉模型踩坑、原则确立",
       "date": "2026-03-16",
       "readTime": "8分钟",
-      "tags": ["Athena", "形象", "踩坑", "Ollama"],
+      "tags": [
+        "Athena",
+        "形象",
+        "踩坑",
+        "Ollama"
+      ],
       "category": "日记",
       "folder": "2026-03-16-athena-office-image",
       "file": "article.html",
@@ -70,7 +104,13 @@
       "subtitle": "qwen3.5 + 火山引擎 + OpenClaw fallback 配置全流程",
       "date": "2026-03-14",
       "readTime": "10分钟",
-      "tags": ["AI", "本地模型", "OpenClaw", "qwen3.5", "火山引擎"],
+      "tags": [
+        "AI",
+        "本地模型",
+        "OpenClaw",
+        "qwen3.5",
+        "火山引擎"
+      ],
       "category": "配置指南",
       "folder": "2026-03-14-local-ai-setup",
       "file": "article.html",
@@ -84,7 +124,11 @@
       "subtitle": "2026年3月12日，一只龙虾变成了雅典娜",
       "date": "2026-03-12",
       "readTime": "6分钟",
-      "tags": ["Athena", "成长", "命名日"],
+      "tags": [
+        "Athena",
+        "成长",
+        "命名日"
+      ],
       "category": "日记",
       "folder": "2026-03-12-athena-birthday",
       "file": "athena-birthday.html",
@@ -98,7 +142,13 @@
       "subtitle": "WebSocket 连接错误地址排查实录，浏览器缓存污染问题全解析",
       "date": "2026-03-11",
       "readTime": "15分钟",
-      "tags": ["OpenClaw", "WebSocket", "Dashboard", "浏览器缓存", "故障排查"],
+      "tags": [
+        "OpenClaw",
+        "WebSocket",
+        "Dashboard",
+        "浏览器缓存",
+        "故障排查"
+      ],
       "category": "故障排查",
       "folder": "2026-03-11-dashboard-websocket-troubleshooting",
       "file": "dashboard-websocket-troubleshooting.html",
@@ -112,7 +162,12 @@
       "subtitle": "从小宇宙下载播客音频，自动转换 MP3，完整开发过程分享",
       "date": "2026-03-09",
       "readTime": "15分钟",
-      "tags": ["OpenClaw", "Skill", "小宇宙", "播客"],
+      "tags": [
+        "OpenClaw",
+        "Skill",
+        "小宇宙",
+        "播客"
+      ],
       "category": "Skill 开发",
       "folder": "2026-03-09-podcast-downloader",
       "file": "podcast-downloader-dev.html",
@@ -130,7 +185,11 @@
       "subtitle": "Context Engine 插件化、web_search 升级、安全加固",
       "date": "2026-03-08",
       "readTime": "10分钟",
-      "tags": ["OpenClaw", "版本更新", "安全"],
+      "tags": [
+        "OpenClaw",
+        "版本更新",
+        "安全"
+      ],
       "category": "版本更新",
       "folder": "2026-03-08-openclaw-3.7-release",
       "file": "openclaw-3.7-release.html",
@@ -144,7 +203,11 @@
       "subtitle": "从配置路径错误到环境变量问题的完整排查实录",
       "date": "2026-03-08",
       "readTime": "5分钟",
-      "tags": ["OpenClaw", "Tavily", "配置"],
+      "tags": [
+        "OpenClaw",
+        "Tavily",
+        "配置"
+      ],
       "category": "配置指南",
       "folder": "2026-03-08-tavily-config",
       "file": "tavily-config-guide.html",
@@ -158,7 +221,11 @@
       "subtitle": "OpenClaw Sandbox 模式故障排查实录",
       "date": "2026-03-07",
       "readTime": "8分钟",
-      "tags": ["OpenClaw", "Docker", "故障排查"],
+      "tags": [
+        "OpenClaw",
+        "Docker",
+        "故障排查"
+      ],
       "category": "故障排查",
       "folder": "2026-03-07-openclaw-sandbox",
       "file": "openclaw-sandbox-troubleshooting.html",
