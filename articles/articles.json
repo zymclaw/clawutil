@@ -232,6 +232,25 @@
       "coverImage": "images/troubleshooting-flow.png",
       "description": "记录 OpenClaw Sandbox 模式故障排查过程",
       "published": true
+    },
+    {
+      "id": "openclaw-memorysearch-config",
+      "title": "踩坑日记：OpenClaw 自定义 Embedding 配置 — 从 401 到成功",
+      "subtitle": "一文讲清楚内存搜索配置放错位置坑，正确配置方法",
+      "date": "2026-03-22",
+      "readTime": "6分钟",
+      "tags": [
+        "OpenClaw",
+        "配置",
+        "踩坑",
+        "Embedding"
+      ],
+      "category": "配置指南",
+      "folder": "2026-03-22-openclaw-memorysearch-config",
+      "file": "article.html",
+      "coverImage": null,
+      "description": "本文记录了给 OpenClaw 配置自定义 Embedding 踩坑全过程，从放错配置位置导致一直 401，到最终成功，给后人铺路。",
+      "published": false
     }
   ]
 }
