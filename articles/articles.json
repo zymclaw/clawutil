@@ -8,14 +8,40 @@
   },
   "articles": [
     {
-      "id": "tavily搜索优化o1检索原则与中英文互补策略",
+      "id": "openclaw-多实例部署踩坑同一台-mac-无法运行两个实例的解决方案",
+      "title": "OpenClaw 多实例部署踩坑：同一台 Mac 无法运行两个实例的解决方案",
+      "subtitle": "LaunchAgent 服务冲突与 Docker 容器化隔离实践",
+      "date": "2026-03-26",
+      "readTime": "8分钟",
+      "tags": [
+        "OpenClaw",
+        "Docker",
+        "macOS",
+        "LaunchAgent",
+        "运维",
+        "踩坑"
+      ],
+      "category": "运维实践",
+      "folder": "2026-03-26-openclaw-多实例部署踩坑同一台-mac-无法运行两个实例的解决方案",
+      "file": "article.html",
+      "coverImage": null,
+      "description": "字节测试任务需要一个隔离的测试环境，我尝试在同一台 Mac 上运行两个 OpenClaw 实例，结果踩了大坑。本文详细分析了 LaunchAgent 服务冲突的根因，并给出了 Docker 容器化的完整解决方案。",
+      "published": false
+    },
+    {
+      "id": "tavily-search-optimization-o1-retrieval",
       "title": "Tavily搜索优化：O(1)检索原则与中英文互补策略",
       "subtitle": "从源头减少无效token，让搜索更快更干净",
       "date": "2026-03-21",
       "readTime": "5分钟",
-      "tags": ["OpenClaw", "搜索", "效率", "Tavily"],
+      "tags": [
+        "OpenClaw",
+        "搜索",
+        "效率",
+        "Tavily"
+      ],
       "category": "效率优化",
-      "folder": "2026-03-21-tavily搜索优化o1检索原则与中英文互补策略",
+      "folder": "2026-03-21-tavily-search-optimization-o1-retrieval",
       "file": "article.html",
       "coverImage": null,
       "description": "源头过滤胜过事后筛选，Tavily+火山中文搜索双保险，O(1)复杂度让搜索更省token更快更准。",
