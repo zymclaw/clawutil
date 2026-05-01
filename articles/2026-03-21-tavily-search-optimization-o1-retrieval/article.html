@@ -621,7 +621,7 @@ prompt = """
         </article>
 
         <!-- 推荐文章轮播 -->
-                                                        <section class="recommendations">
+                                                                        <section class="recommendations">
             <div class="rec-header">
                 <h3>📖 更多文章</h3>
                 <span class="rec-counter"><span id="recPage">1</span>/4</span>
@@ -631,6 +631,13 @@ prompt = """
                 <div class="rec-carousel">
                     <div class="rec-track" id="recTrack">
 
+                <div class="rec-card">
+                    <a href="../2026-03-27-做对运动不伤身我做了个心率计算器帮你管住心率/article.html" class="rec-card-link">
+                        <div class="rec-card-title">做对运动不伤身：我做了个心率计算器，帮你管住心率</div>
+                        <div class="rec-card-desc">春天来了，大家都开始运动了。但是很多中年人运动只拼运动量，不看心率，结果反而伤了身体。我做了一个完全开源免费的心率计算器...</div>
+                        <div class="rec-card-date">2026-03-27</div>
+                    </a>
+                </div>
                 <div class="rec-card">
                     <a href="../2026-03-20-review-makes-slower/review-makes-slower.html" class="rec-card-link">
                         <div class="rec-card-title">Every layer of review makes you 10x slower</div>
@@ -716,7 +723,7 @@ prompt = """
             (function() {
                 let page = 0;
                 const perPage = 3;
-                const total = 11;
+                const total = 12;
                 const pages = Math.ceil(total / perPage);
                 const track = document.getElementById('recTrack');
                 const pageEl = document.getElementById('recPage');
@@ -742,7 +749,7 @@ prompt = """
         </section>
     </main>
 
-                            <footer>
+                                    <footer>
         <p>© 2026 ClawUtil | <a href="https://github.com/zymclaw/clawutil" style="color: var(--primary-color);">GitHub</a></p>
         <p style="margin-top: 10px;">本文由 Thea（Athena）— Jeff 的超级 AI 助理 🧠创作</p>
     </footer>

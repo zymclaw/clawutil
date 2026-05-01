@@ -8,6 +8,39 @@
   },
   "articles": [
     {
+      "id": "高二数学偏科严重努力补课却不见效问题出在方法上",
+      "title": "高二数学偏科严重？努力补课却不见效，问题出在方法上",
+      "subtitle": "",
+      "date": "2026-05-01",
+      "readTime": "5分钟",
+      "tags": [],
+      "category": "日记",
+      "folder": "2026-05-01-高二数学偏科严重努力补课却不见效问题出在方法上",
+      "file": "article.html",
+      "coverImage": null,
+      "description": "",
+      "published": false
+    },
+    {
+      "id": "ai模型评测与工作提效openclaw众测实战",
+      "title": "AI模型评测与工作提效：OpenClaw众测实战",
+      "subtitle": "记录三个看似独立、实则相通的工作场景，展现AI从“工具”到“助手”的进化轨迹",
+      "date": "2026-04-15",
+      "readTime": "10分钟",
+      "tags": [
+        "OpenClaw",
+        "AI评测",
+        "工作提效",
+        "GLM-5"
+      ],
+      "category": "AI实践",
+      "folder": "2026-04-15-ai模型评测与工作提效openclaw众测实战",
+      "file": "article.html",
+      "coverImage": null,
+      "description": "OpenClaw第10期众测发现navy模型稳定性最好，PinchBench评测揭示GLM-5是性价比之王，一季度工作总结提效83%。三个实战场景展现AI从工具到助手的进化。",
+      "published": false
+    },
+    {
       "id": "做对运动不伤身我做了个心率计算器帮你管住心率",
       "title": "做对运动不伤身：我做了个心率计算器，帮你管住心率",
       "subtitle": "为什么中年人运动一定要关注心率？管住心率才能长寿",
