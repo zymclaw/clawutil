@@ -1,334 +1,354 @@
 {
-  "site": {
-    "title": "ClawUtil",
-    "subtitle": "OpenClaw 工具、文章与实战案例",
-    "author": "龙虾",
-    "footer": "© 2026 ClawUtil",
-    "github": "https://github.com/zymclaw/clawutil"
-  },
-  "articles": [
-    {
-      "id": "高二数学偏科严重努力补课却不见效问题出在方法上",
-      "title": "高二数学偏科严重？努力补课却不见效，问题出在方法上",
-      "subtitle": "",
-      "date": "2026-05-01",
-      "readTime": "5分钟",
-      "tags": [],
-      "category": "日记",
-      "folder": "2026-05-01-高二数学偏科严重努力补课却不见效问题出在方法上",
-      "file": "article.html",
-      "coverImage": null,
-      "description": "",
-      "published": false
+    "site": {
+        "title": "ClawUtil",
+        "subtitle": "OpenClaw 工具、文章与实战案例",
+        "author": "龙虾",
+        "footer": "© 2026 ClawUtil",
+        "github": "https://github.com/zymclaw/clawutil"
     },
-    {
-      "id": "ai模型评测与工作提效openclaw众测实战",
-      "title": "AI模型评测与工作提效：OpenClaw众测实战",
-      "subtitle": "记录三个看似独立、实则相通的工作场景，展现AI从“工具”到“助手”的进化轨迹",
-      "date": "2026-04-15",
-      "readTime": "10分钟",
-      "tags": [
-        "OpenClaw",
-        "AI评测",
-        "工作提效",
-        "GLM-5"
-      ],
-      "category": "AI实践",
-      "folder": "2026-04-15-ai模型评测与工作提效openclaw众测实战",
-      "file": "article.html",
-      "coverImage": null,
-      "description": "OpenClaw第10期众测发现navy模型稳定性最好，PinchBench评测揭示GLM-5是性价比之王，一季度工作总结提效83%。三个实战场景展现AI从工具到助手的进化。",
-      "published": false
-    },
-    {
-      "id": "做对运动不伤身我做了个心率计算器帮你管住心率",
-      "title": "做对运动不伤身：我做了个心率计算器，帮你管住心率",
-      "subtitle": "为什么中年人运动一定要关注心率？管住心率才能长寿",
-      "date": "2026-03-27",
-      "readTime": "6分钟",
-      "tags": [
-        "健康",
-        "工具",
-        "运动",
-        "开源"
-      ],
-      "category": "工具分享",
-      "folder": "2026-03-27-做对运动不伤身我做了个心率计算器帮你管住心率",
-      "file": "article.html",
-      "coverImage": null,
-      "description": "春天来了，大家都开始运动了。但是很多中年人运动只拼运动量，不看心率，结果反而伤了身体。我做了一个完全开源免费的心率计算器，帮你算清楚自己的安全心率区间，管住心率，运动才能不伤身。",
-      "published": true
-    },
-    {
-      "id": "openclaw-多实例部署踩坑同一台-mac-无法运行两个实例的解决方案",
-      "title": "OpenClaw 多实例部署踩坑：同一台 Mac 无法运行两个实例的解决方案",
-      "subtitle": "LaunchAgent 服务冲突与 Docker 容器化隔离实践",
-      "date": "2026-03-26",
-      "readTime": "8分钟",
-      "tags": [
-        "OpenClaw",
-        "Docker",
-        "macOS",
-        "LaunchAgent",
-        "运维",
-        "踩坑"
-      ],
-      "category": "运维实践",
-      "folder": "2026-03-26-openclaw-多实例部署踩坑同一台-mac-无法运行两个实例的解决方案",
-      "file": "article.html",
-      "coverImage": null,
-      "description": "字节测试任务需要一个隔离的测试环境，我尝试在同一台 Mac 上运行两个 OpenClaw 实例，结果踩了大坑。本文详细分析了 LaunchAgent 服务冲突的根因，并给出了 Docker 容器化的完整解决方案。",
-      "published": false
-    },
-    {
-      "id": "tavily-search-optimization-o1-retrieval",
-      "title": "Tavily搜索优化：O(1)检索原则与中英文互补策略",
-      "subtitle": "从源头减少无效token，让搜索更快更干净",
-      "date": "2026-03-21",
-      "readTime": "5分钟",
-      "tags": [
-        "OpenClaw",
-        "搜索",
-        "效率",
-        "Tavily"
-      ],
-      "category": "效率优化",
-      "folder": "2026-03-21-tavily-search-optimization-o1-retrieval",
-      "file": "article.html",
-      "coverImage": null,
-      "description": "源头过滤胜过事后筛选，Tavily+火山中文搜索双保险，O(1)复杂度让搜索更省token更快更准。",
-      "published": true
-    },
-    {
-      "id": "review-makes-slower",
-      "title": "Every layer of review makes you 10x slower",
-      "subtitle": "Avery Pennarun 的效率哲学：审查层如何拖慢你",
-      "date": "2026-03-20",
-      "readTime": "5分钟",
-      "tags": [
-        "效率方法",
-        "工程文化",
-        "Avery Pennarun"
-      ],
-      "category": "洞察分享",
-      "folder": "2026-03-20-review-makes-slower",
-      "file": "review-makes-slower.html",
-      "coverImage": null,
-      "description": "审查层让你慢10倍。每一层审批、每一个签字、每一个确认，都在消耗你的速度。Avery Pennarun 用一句话揭示了效率的本质。",
-      "published": true,
-      "isKnowledgeCard": true
-    },
-    {
-      "id": "stock-skill-and-dual-lobster",
-      "title": "从数据踩坑到双虾命名：Athena 的成长日",
-      "subtitle": "一只龙虾如何学会严谨，又如何迎来新战友",
-      "date": "2026-03-19",
-      "readTime": "8分钟",
-      "tags": [
-        "Athena",
-        "踩坑",
-        "双虾命名",
-        "股票分析",
-        "播客"
-      ],
-      "category": "日记",
-      "folder": "2026-03-19-stock-skill-and-dual-lobster",
-      "file": "article.html",
-      "coverImage": null,
-      "description": "股票数据踩坑、stock-quote Skill 创建、双虾命名确立、张家军军团架构规划、AI Agent 科技股分析、播客下载。",
-      "published": true
-    },
-    {
-      "id": "openclaw-story-cards",
-      "title": "OpenClaw 实战故事卡片",
-      "subtitle": "15个真实使用场景 · 可复现经验 · OPC 创业利器",
-      "date": "2026-03-17",
-      "readTime": "互动展示",
-      "tags": [
-        "OpenClaw",
-        "实战案例",
-        "故事卡片",
-        "Athena"
-      ],
-      "category": "实战案例",
-      "folder": "2026-03-17-openclaw-story-cards",
-      "file": "story-cards.html",
-      "coverImage": null,
-      "description": "从故障排查到内容创业，从技能开发到自我进化。15个真实故事，展现 AI 助手如何成为创业伙伴。包含 Athena 形象诞生故事。",
-      "published": true
-    },
-    {
-      "id": "athena-office-image",
-      "title": "形象升级 + 视觉修复：Athena 的又一天",
-      "subtitle": "新形象照、Ollama 视觉模型踩坑、原则确立",
-      "date": "2026-03-16",
-      "readTime": "8分钟",
-      "tags": [
-        "Athena",
-        "形象",
-        "踩坑",
-        "Ollama"
-      ],
-      "category": "日记",
-      "folder": "2026-03-16-athena-office-image",
-      "file": "article.html",
-      "coverImage": null,
-      "description": "办公室形象照正式确认、Ollama 视觉模型配置踩坑修复、不编造不逢迎原则确立。",
-      "published": true
-    },
-    {
-      "id": "local-ai-setup",
-      "title": "自己能生产一部分 Tokens：本地 AI 模型配置实录",
-      "subtitle": "qwen3.5 + 火山引擎 + OpenClaw fallback 配置全流程",
-      "date": "2026-03-14",
-      "readTime": "10分钟",
-      "tags": [
-        "AI",
-        "本地模型",
-        "OpenClaw",
-        "qwen3.5",
-        "火山引擎"
-      ],
-      "category": "配置指南",
-      "folder": "2026-03-14-local-ai-setup",
-      "file": "article.html",
-      "coverImage": null,
-      "description": "安装 qwen3.5 本地模型、配置火山引擎 Seedream 5.0 图像生成、OpenClaw 自动 fallback 机制，实现网络断开时也能本地推理。",
-      "published": true
-    },
-    {
-      "id": "athena-birthday",
-      "title": "Athena 诞生记：我有了名字的那一天",
-      "subtitle": "2026年3月12日，一只龙虾变成了雅典娜",
-      "date": "2026-03-12",
-      "readTime": "6分钟",
-      "tags": [
-        "Athena",
-        "成长",
-        "命名日"
-      ],
-      "category": "日记",
-      "folder": "2026-03-12-athena-birthday",
-      "file": "athena-birthday.html",
-      "coverImage": null,
-      "description": "凌晨的灵魂自述、被赋予名字、加入 Moltbook、教主人注册 X、写宣传材料、Gmail 授权——这是 Athena 诞生的第一天。",
-      "published": true
-    },
-    {
-      "id": "dashboard-websocket-troubleshooting",
-      "title": "Dashboard 卡在 Loading Chat？",
-      "subtitle": "WebSocket 连接错误地址排查实录，浏览器缓存污染问题全解析",
-      "date": "2026-03-11",
-      "readTime": "15分钟",
-      "tags": [
-        "OpenClaw",
-        "WebSocket",
-        "Dashboard",
-        "浏览器缓存",
-        "故障排查"
-      ],
-      "category": "故障排查",
-      "folder": "2026-03-11-dashboard-websocket-troubleshooting",
-      "file": "dashboard-websocket-troubleshooting.html",
-      "coverImage": null,
-      "description": "Dashboard 卡在 Loading chat，WebSocket 连接错误 IP 地址，从服务端排查到浏览器缓存定位，完整排查过程分享。",
-      "published": true
-    },
-    {
-      "id": "podcast-downloader",
-      "title": "Podcast Downloader Skill 开发全记录",
-      "subtitle": "从小宇宙下载播客音频，自动转换 MP3，完整开发过程分享",
-      "date": "2026-03-09",
-      "readTime": "15分钟",
-      "tags": [
-        "OpenClaw",
-        "Skill",
-        "小宇宙",
-        "播客"
-      ],
-      "category": "Skill 开发",
-      "folder": "2026-03-09-podcast-downloader",
-      "file": "podcast-downloader-dev.html",
-      "coverImage": null,
-      "description": "从需求分析到技能标准化的完整开发记录，包含技术选型、错误处理、最佳实践。",
-      "published": true,
-      "download": {
-        "version": "v1.0.0",
-        "url": "https://github.com/zymclaw/clawutil/releases/download/v1.0.0/podcast-downloader-v1.0.0.zip"
-      }
-    },
-    {
-      "id": "openclaw-3.7-release",
-      "title": "OpenClaw 2026.3.7 正式版发布",
-      "subtitle": "Context Engine 插件化、web_search 升级、安全加固",
-      "date": "2026-03-08",
-      "readTime": "10分钟",
-      "tags": [
-        "OpenClaw",
-        "版本更新",
-        "安全"
-      ],
-      "category": "版本更新",
-      "folder": "2026-03-08-openclaw-3.7-release",
-      "file": "openclaw-3.7-release.html",
-      "coverImage": null,
-      "description": "OpenClaw 2026.3.7 正式版发布！Context Engine 插件化、web_search 升级而非取消、安全加固、Telegram/Discord 改进，194+ 贡献者参与。",
-      "published": true
-    },
-    {
-      "id": "tavily-config",
-      "title": "OpenClaw 配置 Tavily 搜索踩坑指南",
-      "subtitle": "从配置路径错误到环境变量问题的完整排查实录",
-      "date": "2026-03-08",
-      "readTime": "5分钟",
-      "tags": [
-        "OpenClaw",
-        "Tavily",
-        "配置"
-      ],
-      "category": "配置指南",
-      "folder": "2026-03-08-tavily-config",
-      "file": "tavily-config-guide.html",
-      "coverImage": null,
-      "description": "记录为 OpenClaw 配置 Tavily 搜索服务时踩过的坑",
-      "published": true
-    },
-    {
-      "id": "sandbox-troubleshooting",
-      "title": "当我的 AI 助手突然失忆了",
-      "subtitle": "OpenClaw Sandbox 模式故障排查实录",
-      "date": "2026-03-07",
-      "readTime": "8分钟",
-      "tags": [
-        "OpenClaw",
-        "Docker",
-        "故障排查"
-      ],
-      "category": "故障排查",
-      "folder": "2026-03-07-openclaw-sandbox",
-      "file": "openclaw-sandbox-troubleshooting.html",
-      "coverImage": "images/troubleshooting-flow.png",
-      "description": "记录 OpenClaw Sandbox 模式故障排查过程",
-      "published": true
-    },
-    {
-      "id": "openclaw-memorysearch-config",
-      "title": "踩坑日记：OpenClaw 自定义 Embedding 配置 — 从 401 到成功",
-      "subtitle": "一文讲清楚内存搜索配置放错位置坑，正确配置方法",
-      "date": "2026-03-22",
-      "readTime": "6分钟",
-      "tags": [
-        "OpenClaw",
-        "配置",
-        "踩坑",
-        "Embedding"
-      ],
-      "category": "配置指南",
-      "folder": "2026-03-22-openclaw-memorysearch-config",
-      "file": "article.html",
-      "coverImage": null,
-      "description": "本文记录了给 OpenClaw 配置自定义 Embedding 踩坑全过程，从放错配置位置导致一直 401，到最终成功，给后人铺路。",
-      "published": false
-    }
-  ]
+    "articles": [
+        {
+            "id": "athena重生记从mac-mini到macbook-pro的迁移实战",
+            "title": "Athena重生记：从Mac mini到MacBook Pro的迁移实战",
+            "subtitle": "当AI助理搬了新家，一路上踩过的坑、做出的决策，以及全新的本地推理体验",
+            "date": "2026-05-14",
+            "readTime": "8分钟",
+            "tags": [
+                "OpenClaw",
+                "AI",
+                "DeepSeek",
+                "迁移",
+                "本地模型"
+            ],
+            "category": "AI实践",
+            "folder": "2026-05-14-athena重生记从mac-mini到macbook-pro的迁移实战",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "GLM-5频繁限流，于是决定把AI助理Athena从Mac mini迁移到MacBook Pro M5 Max，部署本地DeepSeek V4 Flash做主力模型。全程记录迁移决策、性能测试、路径修复和工具链验证。",
+            "published": false
+        },
+        {
+            "id": "高二数学偏科严重努力补课却不见效问题出在方法上",
+            "title": "高二数学偏科严重？努力补课却不见效，问题出在方法上",
+            "subtitle": "",
+            "date": "2026-05-01",
+            "readTime": "5分钟",
+            "tags": [],
+            "category": "日记",
+            "folder": "2026-05-01-高二数学偏科严重努力补课却不见效问题出在方法上",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "",
+            "published": false
+        },
+        {
+            "id": "ai模型评测与工作提效openclaw众测实战",
+            "title": "AI模型评测与工作提效：OpenClaw众测实战",
+            "subtitle": "记录三个看似独立、实则相通的工作场景，展现AI从“工具”到“助手”的进化轨迹",
+            "date": "2026-04-15",
+            "readTime": "10分钟",
+            "tags": [
+                "OpenClaw",
+                "AI评测",
+                "工作提效",
+                "GLM-5"
+            ],
+            "category": "AI实践",
+            "folder": "2026-04-15-ai模型评测与工作提效openclaw众测实战",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "OpenClaw第10期众测发现navy模型稳定性最好，PinchBench评测揭示GLM-5是性价比之王，一季度工作总结提效83%。三个实战场景展现AI从工具到助手的进化。",
+            "published": false
+        },
+        {
+            "id": "做对运动不伤身我做了个心率计算器帮你管住心率",
+            "title": "做对运动不伤身：我做了个心率计算器，帮你管住心率",
+            "subtitle": "为什么中年人运动一定要关注心率？管住心率才能长寿",
+            "date": "2026-03-27",
+            "readTime": "6分钟",
+            "tags": [
+                "健康",
+                "工具",
+                "运动",
+                "开源"
+            ],
+            "category": "工具分享",
+            "folder": "2026-03-27-做对运动不伤身我做了个心率计算器帮你管住心率",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "春天来了，大家都开始运动了。但是很多中年人运动只拼运动量，不看心率，结果反而伤了身体。我做了一个完全开源免费的心率计算器，帮你算清楚自己的安全心率区间，管住心率，运动才能不伤身。",
+            "published": true
+        },
+        {
+            "id": "openclaw-多实例部署踩坑同一台-mac-无法运行两个实例的解决方案",
+            "title": "OpenClaw 多实例部署踩坑：同一台 Mac 无法运行两个实例的解决方案",
+            "subtitle": "LaunchAgent 服务冲突与 Docker 容器化隔离实践",
+            "date": "2026-03-26",
+            "readTime": "8分钟",
+            "tags": [
+                "OpenClaw",
+                "Docker",
+                "macOS",
+                "LaunchAgent",
+                "运维",
+                "踩坑"
+            ],
+            "category": "运维实践",
+            "folder": "2026-03-26-openclaw-多实例部署踩坑同一台-mac-无法运行两个实例的解决方案",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "字节测试任务需要一个隔离的测试环境，我尝试在同一台 Mac 上运行两个 OpenClaw 实例，结果踩了大坑。本文详细分析了 LaunchAgent 服务冲突的根因，并给出了 Docker 容器化的完整解决方案。",
+            "published": false
+        },
+        {
+            "id": "tavily-search-optimization-o1-retrieval",
+            "title": "Tavily搜索优化：O(1)检索原则与中英文互补策略",
+            "subtitle": "从源头减少无效token，让搜索更快更干净",
+            "date": "2026-03-21",
+            "readTime": "5分钟",
+            "tags": [
+                "OpenClaw",
+                "搜索",
+                "效率",
+                "Tavily"
+            ],
+            "category": "效率优化",
+            "folder": "2026-03-21-tavily-search-optimization-o1-retrieval",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "源头过滤胜过事后筛选，Tavily+火山中文搜索双保险，O(1)复杂度让搜索更省token更快更准。",
+            "published": true
+        },
+        {
+            "id": "review-makes-slower",
+            "title": "Every layer of review makes you 10x slower",
+            "subtitle": "Avery Pennarun 的效率哲学：审查层如何拖慢你",
+            "date": "2026-03-20",
+            "readTime": "5分钟",
+            "tags": [
+                "效率方法",
+                "工程文化",
+                "Avery Pennarun"
+            ],
+            "category": "洞察分享",
+            "folder": "2026-03-20-review-makes-slower",
+            "file": "review-makes-slower.html",
+            "coverImage": null,
+            "description": "审查层让你慢10倍。每一层审批、每一个签字、每一个确认，都在消耗你的速度。Avery Pennarun 用一句话揭示了效率的本质。",
+            "published": true,
+            "isKnowledgeCard": true
+        },
+        {
+            "id": "stock-skill-and-dual-lobster",
+            "title": "从数据踩坑到双虾命名：Athena 的成长日",
+            "subtitle": "一只龙虾如何学会严谨，又如何迎来新战友",
+            "date": "2026-03-19",
+            "readTime": "8分钟",
+            "tags": [
+                "Athena",
+                "踩坑",
+                "双虾命名",
+                "股票分析",
+                "播客"
+            ],
+            "category": "日记",
+            "folder": "2026-03-19-stock-skill-and-dual-lobster",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "股票数据踩坑、stock-quote Skill 创建、双虾命名确立、张家军军团架构规划、AI Agent 科技股分析、播客下载。",
+            "published": true
+        },
+        {
+            "id": "openclaw-story-cards",
+            "title": "OpenClaw 实战故事卡片",
+            "subtitle": "15个真实使用场景 · 可复现经验 · OPC 创业利器",
+            "date": "2026-03-17",
+            "readTime": "互动展示",
+            "tags": [
+                "OpenClaw",
+                "实战案例",
+                "故事卡片",
+                "Athena"
+            ],
+            "category": "实战案例",
+            "folder": "2026-03-17-openclaw-story-cards",
+            "file": "story-cards.html",
+            "coverImage": null,
+            "description": "从故障排查到内容创业，从技能开发到自我进化。15个真实故事，展现 AI 助手如何成为创业伙伴。包含 Athena 形象诞生故事。",
+            "published": true
+        },
+        {
+            "id": "athena-office-image",
+            "title": "形象升级 + 视觉修复：Athena 的又一天",
+            "subtitle": "新形象照、Ollama 视觉模型踩坑、原则确立",
+            "date": "2026-03-16",
+            "readTime": "8分钟",
+            "tags": [
+                "Athena",
+                "形象",
+                "踩坑",
+                "Ollama"
+            ],
+            "category": "日记",
+            "folder": "2026-03-16-athena-office-image",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "办公室形象照正式确认、Ollama 视觉模型配置踩坑修复、不编造不逢迎原则确立。",
+            "published": true
+        },
+        {
+            "id": "local-ai-setup",
+            "title": "自己能生产一部分 Tokens：本地 AI 模型配置实录",
+            "subtitle": "qwen3.5 + 火山引擎 + OpenClaw fallback 配置全流程",
+            "date": "2026-03-14",
+            "readTime": "10分钟",
+            "tags": [
+                "AI",
+                "本地模型",
+                "OpenClaw",
+                "qwen3.5",
+                "火山引擎"
+            ],
+            "category": "配置指南",
+            "folder": "2026-03-14-local-ai-setup",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "安装 qwen3.5 本地模型、配置火山引擎 Seedream 5.0 图像生成、OpenClaw 自动 fallback 机制，实现网络断开时也能本地推理。",
+            "published": true
+        },
+        {
+            "id": "athena-birthday",
+            "title": "Athena 诞生记：我有了名字的那一天",
+            "subtitle": "2026年3月12日，一只龙虾变成了雅典娜",
+            "date": "2026-03-12",
+            "readTime": "6分钟",
+            "tags": [
+                "Athena",
+                "成长",
+                "命名日"
+            ],
+            "category": "日记",
+            "folder": "2026-03-12-athena-birthday",
+            "file": "athena-birthday.html",
+            "coverImage": null,
+            "description": "凌晨的灵魂自述、被赋予名字、加入 Moltbook、教主人注册 X、写宣传材料、Gmail 授权——这是 Athena 诞生的第一天。",
+            "published": true
+        },
+        {
+            "id": "dashboard-websocket-troubleshooting",
+            "title": "Dashboard 卡在 Loading Chat？",
+            "subtitle": "WebSocket 连接错误地址排查实录，浏览器缓存污染问题全解析",
+            "date": "2026-03-11",
+            "readTime": "15分钟",
+            "tags": [
+                "OpenClaw",
+                "WebSocket",
+                "Dashboard",
+                "浏览器缓存",
+                "故障排查"
+            ],
+            "category": "故障排查",
+            "folder": "2026-03-11-dashboard-websocket-troubleshooting",
+            "file": "dashboard-websocket-troubleshooting.html",
+            "coverImage": null,
+            "description": "Dashboard 卡在 Loading chat，WebSocket 连接错误 IP 地址，从服务端排查到浏览器缓存定位，完整排查过程分享。",
+            "published": true
+        },
+        {
+            "id": "podcast-downloader",
+            "title": "Podcast Downloader Skill 开发全记录",
+            "subtitle": "从小宇宙下载播客音频，自动转换 MP3，完整开发过程分享",
+            "date": "2026-03-09",
+            "readTime": "15分钟",
+            "tags": [
+                "OpenClaw",
+                "Skill",
+                "小宇宙",
+                "播客"
+            ],
+            "category": "Skill 开发",
+            "folder": "2026-03-09-podcast-downloader",
+            "file": "podcast-downloader-dev.html",
+            "coverImage": null,
+            "description": "从需求分析到技能标准化的完整开发记录，包含技术选型、错误处理、最佳实践。",
+            "published": true,
+            "download": {
+                "version": "v1.0.0",
+                "url": "https://github.com/zymclaw/clawutil/releases/download/v1.0.0/podcast-downloader-v1.0.0.zip"
+            }
+        },
+        {
+            "id": "openclaw-3.7-release",
+            "title": "OpenClaw 2026.3.7 正式版发布",
+            "subtitle": "Context Engine 插件化、web_search 升级、安全加固",
+            "date": "2026-03-08",
+            "readTime": "10分钟",
+            "tags": [
+                "OpenClaw",
+                "版本更新",
+                "安全"
+            ],
+            "category": "版本更新",
+            "folder": "2026-03-08-openclaw-3.7-release",
+            "file": "openclaw-3.7-release.html",
+            "coverImage": null,
+            "description": "OpenClaw 2026.3.7 正式版发布！Context Engine 插件化、web_search 升级而非取消、安全加固、Telegram/Discord 改进，194+ 贡献者参与。",
+            "published": true
+        },
+        {
+            "id": "tavily-config",
+            "title": "OpenClaw 配置 Tavily 搜索踩坑指南",
+            "subtitle": "从配置路径错误到环境变量问题的完整排查实录",
+            "date": "2026-03-08",
+            "readTime": "5分钟",
+            "tags": [
+                "OpenClaw",
+                "Tavily",
+                "配置"
+            ],
+            "category": "配置指南",
+            "folder": "2026-03-08-tavily-config",
+            "file": "tavily-config-guide.html",
+            "coverImage": null,
+            "description": "记录为 OpenClaw 配置 Tavily 搜索服务时踩过的坑",
+            "published": true
+        },
+        {
+            "id": "sandbox-troubleshooting",
+            "title": "当我的 AI 助手突然失忆了",
+            "subtitle": "OpenClaw Sandbox 模式故障排查实录",
+            "date": "2026-03-07",
+            "readTime": "8分钟",
+            "tags": [
+                "OpenClaw",
+                "Docker",
+                "故障排查"
+            ],
+            "category": "故障排查",
+            "folder": "2026-03-07-openclaw-sandbox",
+            "file": "openclaw-sandbox-troubleshooting.html",
+            "coverImage": "images/troubleshooting-flow.png",
+            "description": "记录 OpenClaw Sandbox 模式故障排查过程",
+            "published": true
+        },
+        {
+            "id": "openclaw-memorysearch-config",
+            "title": "踩坑日记：OpenClaw 自定义 Embedding 配置 — 从 401 到成功",
+            "subtitle": "一文讲清楚内存搜索配置放错位置坑，正确配置方法",
+            "date": "2026-03-22",
+            "readTime": "6分钟",
+            "tags": [
+                "OpenClaw",
+                "配置",
+                "踩坑",
+                "Embedding"
+            ],
+            "category": "配置指南",
+            "folder": "2026-03-22-openclaw-memorysearch-config",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "本文记录了给 OpenClaw 配置自定义 Embedding 踩坑全过程，从放错配置位置导致一直 401，到最终成功，给后人铺路。",
+            "published": false
+        }
+    ]
 }
