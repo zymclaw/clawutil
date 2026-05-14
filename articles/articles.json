@@ -25,7 +25,7 @@
             "file": "article.html",
             "coverImage": null,
             "description": "GLM-5频繁限流，于是决定把AI助理Athena从Mac mini迁移到MacBook Pro M5 Max，部署本地DeepSeek V4 Flash做主力模型。全程记录迁移决策、性能测试、路径修复和工具链验证。",
-            "published": false
+            "published": true
         },
         {
             "id": "高二数学偏科严重努力补课却不见效问题出在方法上",
