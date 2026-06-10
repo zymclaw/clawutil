@@ -195,32 +195,11 @@
         }
         footer a { color: var(--primary-color); }
 
-        .recommendations {
-            margin-top: 60px; padding: 30px 0;
-            border-top: 1px solid var(--border-color);
-        }
-        .recommendations h2 { font-size: 1.3rem; }
-        .rec-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px; margin-top: 20px;
-        }
-        .rec-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 10px; padding: 18px; text-decoration: none;
-            color: var(--text-color); transition: all 0.2s;
-        }
-        .rec-card:hover {
-            border-color: var(--primary-color); transform: translateY(-2px);
-        }
-        .rec-card h4 { color: var(--primary-color); font-size: 1rem; margin-bottom: 8px; }
-        .rec-card p { color: var(--text-muted); font-size: 0.85rem; }
-
         @media (max-width: 768px) {
             h1 { font-size: 1.6rem; }
             .meta { flex-direction: column; gap: 10px; }
             .card-grid { grid-template-columns: 1fr; }
         }
-    /* 推荐文章轮播 */
         .recommendations {
             margin-top: 50px;
             padding: 25px;
@@ -372,7 +351,8 @@
                 display: none !important;
             }
         }
-    </style>/* 推荐文章轮播 */
+    </style>
+    <style>
         .recommendations {
             margin-top: 50px;
             padding: 25px;
