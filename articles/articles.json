@@ -8,6 +8,20 @@
     },
     "articles": [
         {
+            "id": "digital-human-lecture-system",
+            "title": "基于 LiveTalking 的双屏数字人产品讲解系统设计实践",
+            "subtitle": "1 张 GPU 卡 + 1 台 NUC → 双屏独立数字人 + PPT 叠加 + 观众互动",
+            "date": "2026-06-10",
+            "readTime": "15分钟",
+            "tags": ["LiveTalking", "数字人", "MuseTalk", "RAG", "WebGL", "FunASR", "架构设计"],
+            "category": "架构设计",
+            "folder": "2026-06-10-digital-human-lecture-system",
+            "file": "article.html",
+            "coverImage": null,
+            "description": "基于 LiveTalking 开源框架，用 1 张 A100 卡 + 1 台 NUC 搭建双屏数字人产品讲解系统。数字人叠加在 PPT 上、自动翻页联动、FunASR CPU 语音识别、RAG 知识库问答，极致资源利用的精简架构方案。",
+            "published": true
+        },
+        {
             "id": "athena重生记从mac-mini到macbook-pro的迁移实战",
             "title": "Athena重生记：从Mac mini到MacBook Pro的迁移实战",
             "subtitle": "当AI助理搬了新家，一路上踩过的坑、做出的决策，以及全新的本地推理体验",
